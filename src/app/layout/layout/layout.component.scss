@@ -1,0 +1,14 @@
+.content-wrapper {
+    height: calc(100vh - 4rem) !important;
+    overflow: auto;
+    background: #efefef !important;
+  }
+
+  .l-panel {
+    width: 16rem !important;
+    display: block;
+  }
+
+  .r-panel {
+    width: calc(100% - 16rem) !important;
+  }
