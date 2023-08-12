@@ -14,4 +14,4 @@ RUN npm run build -- --configuration production
 
 # STAGE 2
 FROM nginx:alpine
-COPY --from=node /app/dist/odbui /usr/share/nginx/html
+COPY --from=node /app/dist/library-server_ui /usr/share/nginx/html
