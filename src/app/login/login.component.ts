@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ResponseModel } from 'src/auth/jwtService';
 import { AjaxService } from 'src/provider/ajax.service';
+import { Dashboard } from 'src/provider/constants';
 import { iNavigation } from 'src/provider/iNavigation';
 
 @Component({
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
     let value = this.loginForm.value;
     this.http.post("login/authenticateLogin", value).then((res:ResponseModel) => {
       if(res.ResponseBody)
-        this.nav.navigate("admin/dashboard", null);
+        this.nav.navigate(Dashboard, null);
     }).catch(e=>{
       alert(e.message);
     })

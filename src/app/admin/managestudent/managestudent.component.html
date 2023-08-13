@@ -1,182 +1,192 @@
 <div class="col-12 full-v main-container">
-    <div class="col-12 row p-0 m-0">
-      <div class="right-panel container col-md-12 p-0">
-        <div class="x_panel mt-2">
-            <div class="container">
-                <h1 class="display-1 text-center custom-class" >Student Profile</h1>
-                <img class="rounded-circle imgsize" [src]="urllink" alt="">
-                <input type="file" class="btn btn-success btn-sm" (change)="selectFiles($event)">
-
+    <div class="x_panel">
+        <div class="x_header">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="col-8">
+              <div class="px-1">
+                <app-breadcrums [title]="'Student'" [subtitle]="'detail'"></app-breadcrums>
+              </div>
             </div>
+          </div>
+        </div>
+        <div class="x_content">
             <div class="row mt-2 p-2 pe-3">
                 <form [formGroup]="studentDetailForm">
-                    <div class="row">
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Student Name</label>
-                            <input type="text" class="form-control" placeholder="Student name" aria-label="Student name" formControlName="studentName" >
-                        </div>
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Mobile No</label>
-                            <input type="text" class="form-control" placeholder="Mobile no" aria-label="Mobile no" formControlName="mobile" >
-                        </div>
-                    </div>
-            
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Email Id</label>
-                            <input type="email" class="form-control" placeholder="Email id" aria-label="Email id" formControlName="email">
-                        </div>
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Seat No</label>
-                            <input type="text" class="form-control" placeholder="Seat no" aria-label="Seat no" formControlName="seatNo" >
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Amount</label>
-                            <input type="email" class="form-control" placeholder="Amount" aria-label="Amount" formControlName="amount">
-                        </div>
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Date of Joining</label>
-                            <form class="row row-cols-sm-auto">
-                                <div class="col-12">
-                                    <div class="input-group">
-                                        <input
-                                            class="form-control"
-                                            placeholder="yyyy-mm-dd"
-                                            name="dp"
-                                            [(ngModel)]="model"
-                                            ngbDatepicker
-                                            #d="ngbDatepicker"
-                                            (dateSelect)="dateOfJoiningSelection($event)"
-                                        />
-                                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                                    </div>
+                    <div class="col-12 row">
+                        <div class="col-md-3">
+                          <div class="x_header_title position-relative">
+                            <div class="img-container-sq" (change)="selectFiles($event)">
+                              <div class="img-container__box">
+                                <img [attr.src]="profileURL" alt="User">
+                                <input type="file" id="uploadocument" class="d-none" accept=".jpg, .jpeg, .png"
+                                  formControlName="ProfileImgPath" />
+                                <div class="img-container__btn mt-2">
+                                  <button class="btn btn-outline-success form-control" >Browse</button>
                                 </div>
-                            </form>
-                        </div>
-                    </div>
-            
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Date of Fees Payment</label>
-                            <form class="row row-cols-sm-auto">
-                                <div class="col-12">
-                                    <div class="input-group">
-                                        <input
-                                            class="form-control"
-                                            placeholder="yyyy-mm-dd"
-                                            name="dp"
-                                            [(ngModel)]="DateOfFeesPaymentModel"
-                                            ngbDatepicker
-                                            #fp="ngbDatepicker"
-                                            (dateSelect)="dateOfFeesPaymentSelection($event)"
-                                        />
-                                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="fp.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Locker Fesility</label>
-                            <div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="lockerFesility" 
-                                        value="true" formControlName="lockerFesility">
-                                    <label class="form-check-label" for="inlineRadio1">Yes</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="lockerFesility"
-                                        value="fasle" formControlName="lockerFesility">
-                                    <label class="form-check-label" for="inlineRadio2">No</label>
-                                </div>
+                              </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Locker No</label>
-                            <input type="text" class="form-control" placeholder="Locker no" aria-label="Locker no" formControlName="lockerNo" >
-                        </div>
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Locker Fees</label>
-                            <input type="text" class="form-control" placeholder="Locker fees" aria-label="Locker fees" formControlName="lockerFees" >
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Ref Id Card</label>
-                            <div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="refIdCardIssued"
-                                        value="true" formControlName="refIdCardIssued" >
-                                    <label class="form-check-label" for="inlineRadio1">Issued</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="refIdCardIssued" 
-                                        value="false" formControlName="refIdCardIssued">
-                                    <label class="form-check-label" for="inlineRadio2">Not Issued</label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Ref Id Card Issue Date</label>
-                            <form class="row row-cols-sm-auto">
-                                <div class="col-12">
-                                    <div class="input-group">
-                                        <input
-                                            class="form-control"
-                                            placeholder="yyyy-mm-dd"
-                                            name="dp"
-                                            [(ngModel)]="refIdCardIssueDateModel"
-                                            ngbDatepicker
-                                            #cardissuedate="ngbDatepicker"
-                                            (dateSelect)="refIdCardIssueDateSelection($event)"
-                                        />
-                                        <button class="btn btn-outline-secondary bi bi-calendar3" (click)="cardissuedate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                    <div class="row mt-3">
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Card Deposit</label>
-                            <div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="cardDeposit" 
-                                        value="true" formControlName="cardDeposit">
-                                    <label class="form-check-label" for="inlineRadio1">Yes</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="cardDeposit" 
-                                        value="false" formControlName="cardDeposit">
-                                    <label class="form-check-label" for="inlineRadio2">No</label>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-            
-                    <div class="row mt-3">
-                        
-                        <div class="col">
-                            <label for="" class="form-label ps-2">Remarks</label>
-                        </div>
-                        <div class="form-floating">
-                            <textarea class="form-control" placeholder="Leave a comment here"  formControlName="remarks"></textarea>
                           </div>
-                    </div>
-                    <div class="mt-3 ps-2">
-                        <div>
-                            <button type="submit" class="btn btn-primary ps-2" (click)="addStudentDetail()" >Submit</button>
-                            <button type="submit" class="btn btn-success ms-2">clear</button>
                         </div>
-                        
+                        <div class="col-md-9">
+                            <div class="row col-md-12">
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Student Name</label>
+                                    <input type="text" class="form-control" placeholder="Student name" aria-label="Student name" formControlName="studentName" >
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Mobile No</label>
+                                    <input type="text" class="form-control" placeholder="Mobile no" aria-label="Mobile no" formControlName="mobile" >
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Email Id</label>
+                                    <input type="email" class="form-control" placeholder="Email id" aria-label="Email id" formControlName="email">
+                                </div>
+                            </div>
+                            <div class="row col-md-12 mt-3">
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Locker Fees</label>
+                                    <input type="text" class="form-control" placeholder="Locker fees" aria-label="Locker fees" formControlName="lockerFees" >
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Locker Fesility</label>
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="lockerFesility" 
+                                                value="true" formControlName="lockerFesility">
+                                            <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="lockerFesility"
+                                                value="fasle" formControlName="lockerFesility">
+                                            <label class="form-check-label" for="inlineRadio2">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Locker No</label>
+                                    <input type="text" class="form-control" placeholder="Locker no" aria-label="Locker no" formControlName="lockerNo" >
+                                </div>
+                            </div>
+                            <div class="row col-md-12 mt-3">
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Amount</label>
+                                    <input type="email" class="form-control" placeholder="Amount" aria-label="Amount" formControlName="amount">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Date of Fees Payment</label>
+                                    <form class="row row-cols-sm-auto">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <input
+                                                    class="form-control"
+                                                    placeholder="yyyy-mm-dd"
+                                                    name="dp"
+                                                    [(ngModel)]="DateOfFeesPaymentModel"
+                                                    ngbDatepicker
+                                                    #fp="ngbDatepicker"
+                                                    (dateSelect)="dateOfFeesPaymentSelection($event)"
+                                                />
+                                                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="fp.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Date of Joining</label>
+                                    <form class="row row-cols-sm-auto">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <input
+                                                    class="form-control"
+                                                    placeholder="yyyy-mm-dd"
+                                                    name="dp"
+                                                    [(ngModel)]="model"
+                                                    ngbDatepicker
+                                                    #d="ngbDatepicker"
+                                                    (dateSelect)="dateOfJoiningSelection($event)"
+                                                />
+                                                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="d.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    
+                    <div class="row col-md-12 mt-3">
+                        <div class="col-md-6 mt-3">
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <label for="" class="form-label ps-2">Seat No</label>
+                                    <input type="text" class="form-control" placeholder="Seat no" aria-label="Seat no" formControlName="seatNo" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="" class="form-label ps-2">Card Deposit</label>
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="cardDeposit" 
+                                                value="true" formControlName="cardDeposit">
+                                            <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="cardDeposit" 
+                                                value="false" formControlName="cardDeposit">
+                                            <label class="form-check-label" for="inlineRadio2">No</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-md-12 mt-3">
+                                <div class="col-md-6">
+                                    <label for="" class="form-label ps-2">Ref Id Card Issue Date</label>
+                                    <form class="row row-cols-sm-auto">
+                                        <div class="col-md-12">
+                                            <div class="input-group">
+                                                <input
+                                                    class="form-control"
+                                                    placeholder="yyyy-mm-dd"
+                                                    name="dp"
+                                                    [(ngModel)]="refIdCardIssueDateModel"
+                                                    ngbDatepicker
+                                                    #cardissuedate="ngbDatepicker"
+                                                    (dateSelect)="refIdCardIssueDateSelection($event)"
+                                                />
+                                                <button class="btn btn-outline-secondary bi bi-calendar3" (click)="cardissuedate.toggle()" type="button"><i class="fa fa-calendar"></i></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="" class="form-label ps-2">Ref Id Card</label>
+                                    <div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="refIdCardIssued"
+                                                value="true" formControlName="refIdCardIssued" >
+                                            <label class="form-check-label" for="inlineRadio1">Issued</label>
+                                        </div>
+                                        <div class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" name="refIdCardIssued" 
+                                                value="false" formControlName="refIdCardIssued">
+                                            <label class="form-check-label" for="inlineRadio2">Not Issued</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="" class="form-label ps-2">Remarks</label>
+                            <textarea class="form-control" rows="5" placeholder="Leave a comment here"  formControlName="remarks"></textarea>
+                        </div>
+                    </div>
+                    <div class="mt-4 text-end ps-2 me-4">
+                        <button type="submit" class="btn btn-danger me-2"><i class="fa fa-close pe-1"></i> Reset</button>
+                        <button class="btn btn-success" [disabled]="isLoading" (click)="addStudentDetail()">
+                            <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-user-circle-o': !isLoading}"></i>
+                            {{ isLoading ? 'Wait' : 'Register' }}
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
-      </div>
     </div>
   </div>

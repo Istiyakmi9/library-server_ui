@@ -6,6 +6,10 @@ export const JsonFormatter = "jsonformatter";
 export const TableSampleData = "tablesampledata";
 export const Home = "home";
 
+export const Dashboard = "admin/dashboard"
+export const ManageStudent = 'admin/managestudent';
+export const Student = 'admin/student';
+
 export const LiveUrl = "liveurl";
 export const ApiKey = "AIzaSyAkFANPvmh1x_ajxADulhWiPcsNJHqw1Hs";
 export const AccessTokenExpiredOn = "access_token_expired_on";
@@ -57,7 +61,7 @@ export const DirectoryImg = "assets/ext/directory.jpg";
 export const Images = "assets/ext/image.png";
 export const DocumentPath = "Documents";
 export const UserPath = "User";
-export const UserImage = "assets/images/faces/face.jpg";
+export const UserImage = "assets/images/face.jpg";
 export const OrgLogo = "assets/images/organization-logo.jpg"
 
 
