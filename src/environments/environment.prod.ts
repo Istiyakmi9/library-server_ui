@@ -3,12 +3,12 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
-  env: "local",
+  production: true,
+  env: "production",
   OAuthClientId: "1084985264281-ehe21udg412eesl9p6uhksoh3s2r8d0c.apps.googleusercontent.com",
   OAuthSecret: "7pxr3O8iM4SVSs8ozTC5tXts",
 
-  baseUrl: "http://localhost:8080/api/",
+  baseUrl: "http://www.wisdomreadinghall.com/api/",
 
   // baseDotNetUrl: "http://tracker.io/dn/api/",
   // baseSpringUrl: "http://tracker.io/sb/api/eps/",

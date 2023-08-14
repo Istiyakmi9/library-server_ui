@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ResponseModel } from 'src/auth/jwtService';
 import { AjaxService } from 'src/provider/ajax.service';
+import { UserImage } from 'src/provider/constants';
 import { iNavigation } from 'src/provider/iNavigation';
 
 @Component({
@@ -13,10 +14,11 @@ import { iNavigation } from 'src/provider/iNavigation';
 export class ManagestudentComponent implements OnInit {
 
   studentDetailForm!: FormGroup;
-
+  profileURL: string = UserImage;
   model: NgbDateStruct;
   DateOfFeesPaymentModel: NgbDateStruct;
   refIdCardIssueDateModel: NgbDateStruct;
+  isLoading: boolean = false;
 
   constructor(private fb: FormBuilder,
               private http: AjaxService,
@@ -27,15 +29,16 @@ export class ManagestudentComponent implements OnInit {
   }
 
   addStudentDetail(){
+    this.isLoading = true;
     let value = this.studentDetailForm.value;
     this.http.post("studentDetail/addStudentDetail", value).then((res:ResponseModel) => {
-      if(res.ResponseBody)
+      if(res.ResponseBody) {
         alert("Data has been added in StudentDetail");
+        this.isLoading = false;
+      }
     }).catch(e => {
       alert(e.message)
     })
-    console.log(value);
-
   }
 
   dateOfJoiningSelection(e: NgbDateStruct) {
