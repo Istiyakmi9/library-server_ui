@@ -1,5 +1,5 @@
 
-<div class="col-12 full-v main-container">
+<div class="col-12 full-v main-container" [ngClass]="{'preload': isLoading}">
   <div class="x_panel">
     <div class="x_header">
       <div class="d-flex justify-content-between align-items-center">
@@ -13,98 +13,107 @@
         </div>
       </div>
     </div>
-    <div class="x_content">
-      <div class="t-table t-list t-border col-md-12">
-        <div class="hide-bar"></div>
-        <div class="t-head">
-          <div class="tr">
-            <div class="th fe-index">
-              <div class="t-index">
-                <a href="javascript:void()" class="ps-3">#</a>
-              </div>
-            </div>
-            <div class="th fe-5">
-              <div class="cell-wrapper">
-                <input class="form-control form-control-sm" (keydown.esc)="resetFilter()"
-                  (keyup.enter)="filterRecords()" autofocus [(ngModel)]="studentDetail.studentName"
-                  placeholder="Search by Name" id="namefilter">
-                <div class="t-filter" (click)="arrangeDetails(orderByNameAsc, 'FirstName')">
-                  <a href="javascript:void()" class="pe-2">Student Name</a>
-                  <i class="fa fa-sort-amount-asc"
-                    [ngClass]="{'d-none': orderByNameAsc == null || !orderByNameAsc }" aria-hidden="true"></i>
-                  <i class="fa fa-sort-amount-desc"
-                    [ngClass]="{'d-none': orderByNameAsc == null || orderByNameAsc }" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-            <div class="th fe-2">
-              <div class="cell-wrapper">
-                <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
-                  (keydown.esc)="resetFilter()" [(ngModel)]="studentDetail.mobile"
-                  placeholder="Search by MobileNumber">
-                <div class="t-filter" (click)="arrangeDetails(orderByMobileAsc, 'Mobile')">
-                  <a href="javascript:void()" class="pe-2">Mobile Number</a>
-                  <i class="fa fa-sort-amount-asc"
-                    [ngClass]="{'d-none': orderByMobileAsc == null || !orderByMobileAsc }" aria-hidden="true"></i>
-                  <i class="fa fa-sort-amount-desc"
-                    [ngClass]="{'d-none': orderByMobileAsc == null || orderByMobileAsc }" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-            <div class="th fe-2">
-              <div class="cell-wrapper">
-                <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
-                  (keydown.esc)="resetFilter()" [(ngModel)]="studentDetail.email" placeholder="Search by Email">
-                <div class="t-filter" (click)="arrangeDetails(orderByEmailAsc, 'Email')">
-                  <a href="javascript:void()" class="pe-2">Email Id</a>
-                  <i class="fa fa-sort-amount-asc"
-                    [ngClass]="{'d-none': orderByEmailAsc == null || !orderByEmailAsc }" aria-hidden="true"></i>
-                  <i class="fa fa-sort-amount-desc"
-                    [ngClass]="{'d-none': orderByEmailAsc == null || orderByEmailAsc }" aria-hidden="true"></i>
-                </div>
-              </div>
-            </div>
-            <div class="th fe-1 text-center">ACTIONS</div>
-          </div>
+    <div [ngSwitch]="isLoading">
+      <div *ngSwitchCase="true">
+        <div class="mt-5">
+          <app-pre-load-table></app-pre-load-table>
         </div>
-        <div class="t-body">
-          <ng-container *ngIf="isRecordFound">
-            <div class="tr py-2" *ngFor="let student of allStudent; let i = index;">
-              <div class="td align-middle text-center fe-index">
-                <div class="cell-wrapper">
-                  {{i + 1}}
+      </div>
+      <div *ngSwitchDefault>
+        <div class="x_content">
+          <div class="t-table t-list t-border col-md-12">
+            <div class="hide-bar"></div>
+            <div class="t-head">
+              <div class="tr">
+                <div class="th fe-index">
+                  <div class="t-index">
+                    <a href="javascript:void()" class="ps-3">#</a>
+                  </div>
                 </div>
-              </div>
-              <div class="td align-middle fe-5">
-                <div class="cell-wrapper">
-                  {{student.studentName}}
+                <div class="th fe-5">
+                  <div class="cell-wrapper">
+                    <input class="form-control form-control-sm" (keydown.esc)="resetFilter()"
+                      (keyup.enter)="filterRecords()" autofocus [(ngModel)]="studentDetail.studentName"
+                      placeholder="Search by Name" id="namefilter">
+                    <div class="t-filter" (click)="arrangeDetails(orderByNameAsc, 'FirstName')">
+                      <a href="javascript:void()" class="pe-2">Student Name</a>
+                      <i class="fa fa-sort-amount-asc"
+                        [ngClass]="{'d-none': orderByNameAsc == null || !orderByNameAsc }" aria-hidden="true"></i>
+                      <i class="fa fa-sort-amount-desc"
+                        [ngClass]="{'d-none': orderByNameAsc == null || orderByNameAsc }" aria-hidden="true"></i>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="td align-middle fe-2">
-                <div class="cell-wrapper">
-                  {{student.mobile}}
+                <div class="th fe-2">
+                  <div class="cell-wrapper">
+                    <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                      (keydown.esc)="resetFilter()" [(ngModel)]="studentDetail.mobile"
+                      placeholder="Search by MobileNumber">
+                    <div class="t-filter" (click)="arrangeDetails(orderByMobileAsc, 'Mobile')">
+                      <a href="javascript:void()" class="pe-2">Mobile Number</a>
+                      <i class="fa fa-sort-amount-asc"
+                        [ngClass]="{'d-none': orderByMobileAsc == null || !orderByMobileAsc }" aria-hidden="true"></i>
+                      <i class="fa fa-sort-amount-desc"
+                        [ngClass]="{'d-none': orderByMobileAsc == null || orderByMobileAsc }" aria-hidden="true"></i>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="td align-middle fe-2">
-                <div class="cell-wrapper">
-                  {{student.email}}
+                <div class="th fe-2">
+                  <div class="cell-wrapper">
+                    <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                      (keydown.esc)="resetFilter()" [(ngModel)]="studentDetail.email" placeholder="Search by Email">
+                    <div class="t-filter" (click)="arrangeDetails(orderByEmailAsc, 'Email')">
+                      <a href="javascript:void()" class="pe-2">Email Id</a>
+                      <i class="fa fa-sort-amount-asc"
+                        [ngClass]="{'d-none': orderByEmailAsc == null || !orderByEmailAsc }" aria-hidden="true"></i>
+                      <i class="fa fa-sort-amount-desc"
+                        [ngClass]="{'d-none': orderByEmailAsc == null || orderByEmailAsc }" aria-hidden="true"></i>
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div class="td align-middle text-center fe-1">
-                <a href="javascript:void(0)" class="text-deccoration-none">
-                  <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
-                </a> 
-                <a href="javascript:void(0)" class="text-deccoration-none ms-2 ">
-                  <i class="fa fa-trash-o ps-2 text-danger" aria-hidden="true"></i>
-                </a>
+                <div class="th fe-1 text-center">ACTIONS</div>
               </div>
             </div>
-          </ng-container>
-          <ng-container *ngIf="!isRecordFound">
-            <div class="custom-height my-5 py-5 fw-bold fs-3 text-danger d-flex align-items-center justify-content-center">
-              <p class="my-5 py-5">Record Not Found</p>
+            <div class="t-body">
+              <ng-container *ngIf="isRecordFound">
+                <div class="tr py-2" *ngFor="let student of allStudent; let i = index;">
+                  <div class="td align-middle text-center fe-index">
+                    <div class="cell-wrapper">
+                      {{i + 1}}
+                    </div>
+                  </div>
+                  <div class="td align-middle fe-5">
+                    <div class="cell-wrapper">
+                      {{student.studentName}}
+                    </div>
+                  </div>
+                  <div class="td align-middle fe-2">
+                    <div class="cell-wrapper">
+                      {{student.mobile}}
+                    </div>
+                  </div>
+                  <div class="td align-middle fe-2">
+                    <div class="cell-wrapper">
+                      {{student.email}}
+                    </div>
+                  </div>
+                  <div class="td align-middle text-center fe-1">
+                    <a href="javascript:void(0)" class="text-deccoration-none">
+                      <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="text-deccoration-none ms-2 ">
+                      <i class="fa fa-trash-o ps-2 text-danger" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!isRecordFound">
+                <div class="custom-height my-5 py-5 fw-bold fs-3 text-danger d-flex align-items-center justify-content-center">
+                  <p class="my-5 py-5">Record Not Found</p>
+                </div>
+              </ng-container>
             </div>
-          </ng-container>
+          </div>
         </div>
       </div>
     </div>
