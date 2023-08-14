@@ -42,6 +42,10 @@ export class StudentComponent implements OnInit {
     })
   }
 
+  updateStudentDetail(item: Student){
+    this.nav.navigate(ManageStudent, item)
+  }
+
   navManageStudent() {
     this.nav.navigate(ManageStudent, null);
   }
@@ -82,7 +86,6 @@ export class StudentComponent implements OnInit {
     let searchQuery = "";
     let delimiter = "";
     this.studentData.SearchString = ""
-    this.studentData;
   }
 
   resetFilter() {

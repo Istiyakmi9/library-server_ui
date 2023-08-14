@@ -5,6 +5,7 @@ import { ResponseModel } from 'src/auth/jwtService';
 import { AjaxService } from 'src/provider/ajax.service';
 import { UserImage } from 'src/provider/constants';
 import { iNavigation } from 'src/provider/iNavigation';
+import { Student } from '../student/student.component';
 
 @Component({
   selector: 'app-managestudent',
@@ -19,12 +20,23 @@ export class ManagestudentComponent implements OnInit {
   DateOfFeesPaymentModel: NgbDateStruct;
   refIdCardIssueDateModel: NgbDateStruct;
   isLoading: boolean = false;
+  studentDetail: Student = new Student();
 
   constructor(private fb: FormBuilder,
               private http: AjaxService,
               private nav: iNavigation){}
 
   ngOnInit(): void {
+    let data = this.nav.getValue();
+    if(data){
+      this.studentDetail = data;
+      this.studentDetail.dateOfJoining = new Date(this.studentDetail.dateOfJoining);
+      this.model = { day: this.studentDetail.dateOfJoining.getDate(), month: this.studentDetail.dateOfJoining.getMonth() + 1, year: this.studentDetail.dateOfJoining.getFullYear()};
+      this.studentDetail.dateOfFeesPayment = new Date(this.studentDetail.dateOfFeesPayment);
+      this.DateOfFeesPaymentModel = { day: this.studentDetail.dateOfFeesPayment.getDate(), month: this.studentDetail.dateOfFeesPayment.getMonth() + 1, year: this.studentDetail.dateOfFeesPayment.getFullYear()};
+      this.studentDetail.refIdCardIssueDate = new Date(this.studentDetail.refIdCardIssueDate);
+      this.refIdCardIssueDateModel = { day: this.studentDetail.refIdCardIssueDate.getDate(), month: this.studentDetail.refIdCardIssueDate.getMonth() + 1, year: this.studentDetail.refIdCardIssueDate.getFullYear()};
+    }
     this.initForm()
   }
 
@@ -39,6 +51,11 @@ export class ManagestudentComponent implements OnInit {
     }).catch(e => {
       alert(e.message)
     })
+  }
+
+  updateStudentDetail(){
+   
+    
   }
 
   dateOfJoiningSelection(e: NgbDateStruct) {
@@ -70,20 +87,20 @@ export class ManagestudentComponent implements OnInit {
 
   initForm(){
     this.studentDetailForm = this.fb.group({
-      studentName: new FormControl(""),
-      mobile: new FormControl(""),
-      email: new FormControl(""),
-      seatNo: new FormControl(""),
-      amount: new FormControl(""),
-      dateOfJoining: new FormControl(""),
-      dateOfFeesPayment: new FormControl(""),
-      lockerFesility: new FormControl(""),
-      lockerNo: new FormControl(""),
-      lockerFees: new FormControl(""),
-      refIdCardIssued: new FormControl(""),
-      refIdCardIssueDate: new FormControl(""),
-      cardDeposit: new FormControl(""),
-      remarks: new FormControl("")
+      studentName: new FormControl(this.studentDetail.studentName),
+      mobile: new FormControl(this.studentDetail.mobile),
+      email: new FormControl(this.studentDetail.email),
+      seatNo: new FormControl(this.studentDetail.seatNo),
+      amount: new FormControl(this.studentDetail.amount),
+      dateOfJoining: new FormControl(this.studentDetail.dateOfJoining),
+      dateOfFeesPayment: new FormControl(this.studentDetail.dateOfFeesPayment),
+      lockerFesility: new FormControl(this.studentDetail.lockerFesility),
+      lockerNo: new FormControl(this.studentDetail.lockerNo),
+      lockerFees: new FormControl(this.studentDetail.lockerFees),
+      refIdCardIssued: new FormControl(this.studentDetail.refIdCardIssued),
+      refIdCardIssueDate: new FormControl(this.studentDetail.refIdCardIssueDate),
+      cardDeposit: new FormControl(this.studentDetail.cardDeposit),
+      remarks: new FormControl(this.studentDetail.remarks)
 
     })
   }
