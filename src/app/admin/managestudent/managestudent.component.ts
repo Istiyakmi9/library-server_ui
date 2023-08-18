@@ -3,9 +3,10 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { NgbDateStruct } from '@ng-bootstrap/ng-bootstrap';
 import { ResponseModel } from 'src/auth/jwtService';
 import { AjaxService } from 'src/provider/ajax.service';
-import { UserImage } from 'src/provider/constants';
+import { ProfileImage, UserImage, Student } from 'src/provider/constants';
 import { iNavigation } from 'src/provider/iNavigation';
-import { Student } from '../student/student.component';
+import { StudentDetail } from '../student/student.component';
+declare var $: any;
 
 @Component({
   selector: 'app-managestudent',
@@ -20,7 +21,9 @@ export class ManagestudentComponent implements OnInit {
   DateOfFeesPaymentModel: NgbDateStruct;
   refIdCardIssueDateModel: NgbDateStruct;
   isLoading: boolean = false;
-  studentDetail: Student = new Student();
+  studentDetail: StudentDetail = new StudentDetail();
+  fileDetail: Array<any> = [];
+  imageIndex: number = 0;
 
   constructor(private fb: FormBuilder,
               private http: AjaxService,
@@ -43,9 +46,13 @@ export class ManagestudentComponent implements OnInit {
   addStudentDetail(){
     this.isLoading = true;
     let value = this.studentDetailForm.value;
-    this.http.post("studentDetail/addStudentDetail", value).then((res:ResponseModel) => {
+    let formData = new FormData();
+    formData.append("studentDetail", JSON.stringify(value))
+    formData.append("profile", this.fileDetail[0].file)
+    this.http.post("studentDetail/addStudentDetail", formData).then((res:ResponseModel) => {
       if(res.ResponseBody) {
         alert("Data has been added in StudentDetail");
+        this.nav.navigate(Student, null);
         this.isLoading = false;
       }
     }).catch(e => {
@@ -64,6 +71,30 @@ export class ManagestudentComponent implements OnInit {
       }).catch(e => {
         alert(e.message)
       })
+  }
+
+  uploadImageProfile(event: any) {
+    if (event.target.files) {
+      var reader = new FileReader();
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event: any) => {
+        this.profileURL = event.target.result;
+      };
+      // this.employeeForm.patchValue({
+      //   ProfileImgPath: event.target.result,
+      // });
+      let selectedfile = event.target.files;
+      let file = <File>selectedfile[0];
+      this.imageIndex = new Date().getTime();
+      this.fileDetail.push({
+        name: `profile_${this.imageIndex}`,
+        file: file
+      });
+    }
+  }
+
+  fireBrowserFile() {
+    $("#uploadocument").click();
   }
 
   dateOfJoiningSelection(e: NgbDateStruct) {
@@ -92,6 +123,9 @@ export class ManagestudentComponent implements OnInit {
       }
     }
   }
+
+
+
 
   initForm(){
     this.studentDetailForm = this.fb.group({

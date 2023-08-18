@@ -16,7 +16,7 @@ export class StudentComponent implements OnInit {
   orderByNameAsc: boolean = null;
   orderByMobileAsc: boolean = null;
   orderByEmailAsc: boolean = null;
-  studentDetail: Student = new Student();
+  studentDetail: StudentDetail = new StudentDetail();
   isLoading: boolean = false;
 
   constructor(private http: AjaxService,
@@ -42,7 +42,7 @@ export class StudentComponent implements OnInit {
     })
   }
 
-  updateStudentDetail(item: Student){
+  updateStudentDetail(item: StudentDetail){
     this.nav.navigate(ManageStudent, item)
   }
 
@@ -98,7 +98,7 @@ export class StudentComponent implements OnInit {
  
 }
 
-export class Student {
+export class StudentDetail {
   userId: number = 0;
   studentName: string = null;
   mobile: string = null;
