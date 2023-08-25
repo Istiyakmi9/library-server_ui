@@ -39,6 +39,9 @@ export class ManagestudentComponent implements OnInit {
       this.DateOfFeesPaymentModel = { day: this.studentDetail.dateOfFeesPayment.getDate(), month: this.studentDetail.dateOfFeesPayment.getMonth() + 1, year: this.studentDetail.dateOfFeesPayment.getFullYear()};
       this.studentDetail.refIdCardIssueDate = new Date(this.studentDetail.refIdCardIssueDate);
       this.refIdCardIssueDateModel = { day: this.studentDetail.refIdCardIssueDate.getDate(), month: this.studentDetail.refIdCardIssueDate.getMonth() + 1, year: this.studentDetail.refIdCardIssueDate.getFullYear()};
+      if (data.filePath) {
+        this.profileURL = `${this.http.GetImageBasePath()}${data.filePath}`
+      }
     }
     this.initForm()
   }
@@ -47,8 +50,9 @@ export class ManagestudentComponent implements OnInit {
     this.isLoading = true;
     let value = this.studentDetailForm.value;
     let formData = new FormData();
-    formData.append("studentDetail", JSON.stringify(value))
-    formData.append("profile", this.fileDetail[0].file)
+    formData.append("studentDetail", JSON.stringify(value));
+    if (this.fileDetail.length > 0)
+      formData.append("profile", this.fileDetail[0].file)
     this.http.post("studentDetail/addStudentDetail", formData).then((res:ResponseModel) => {
       if(res.ResponseBody) {
         alert("Data has been added in StudentDetail");

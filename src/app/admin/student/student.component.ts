@@ -114,4 +114,5 @@ export class StudentDetail {
   refIdCardIssueDate: Date = null;
   cardDeposit: boolean = null;
   remarks: string = null;
+  filePath: string = null;
 }
