@@ -24,7 +24,7 @@ export class AjaxService {
   }
 
   public GetImageBasePath() {
-    let ImageBaseUrl = environment.baseUrl.replace("/api", "/Files");
+    let ImageBaseUrl = environment.baseUrl.replace("/api", "/files/documents");
     return ImageBaseUrl;
   }
 

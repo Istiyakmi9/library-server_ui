@@ -40,7 +40,7 @@ export class ManagestudentComponent implements OnInit {
       this.studentDetail.refIdCardIssueDate = new Date(this.studentDetail.refIdCardIssueDate);
       this.refIdCardIssueDateModel = { day: this.studentDetail.refIdCardIssueDate.getDate(), month: this.studentDetail.refIdCardIssueDate.getMonth() + 1, year: this.studentDetail.refIdCardIssueDate.getFullYear()};
       if (data.filePath) {
-        this.profileURL = `${this.http.GetImageBasePath()}${data.filePath}`
+        this.profileURL = `${this.http.GetImageBasePath()}/${data.filePath}`
       }
     }
     this.initForm()
