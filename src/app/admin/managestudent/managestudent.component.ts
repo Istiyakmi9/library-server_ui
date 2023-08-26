@@ -65,16 +65,21 @@ export class ManagestudentComponent implements OnInit {
   }
 
   updateStudentDetail(){
-      this.isLoading = true;
-      let value = this.studentDetailForm.value;
-      this.http.put(`studentDetail/updateStudentDetail/${this.studentDetail.userId}`, value).then((res:ResponseModel) => {
-        if(res.ResponseBody){
-          alert("Data has been updated in StudentDetail");
-          this.isLoading = false;
-        }
-      }).catch(e => {
-        alert(e.message)
-      })
+    this.isLoading = true;
+    let value = this.studentDetailForm.value;
+    let formData = new FormData();
+    formData.append("studentDetail", JSON.stringify(value));
+    if (this.fileDetail.length > 0)
+      formData.append("profile", this.fileDetail[0].file)
+    this.http.put(`studentDetail/updateStudentDetail/${this.studentDetail.userId}`, formData).then((res:ResponseModel) => {
+      if(res.ResponseBody) {
+        alert("Data has been updated in StudentDetail");
+        this.nav.navigate(Student, null);
+        this.isLoading = false;
+      }
+    }).catch(e => {
+      alert(e.message)
+    })
   }
 
   uploadImageProfile(event: any) {
