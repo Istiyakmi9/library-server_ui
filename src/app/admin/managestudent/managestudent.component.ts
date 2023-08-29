@@ -24,26 +24,37 @@ export class ManagestudentComponent implements OnInit {
   studentDetail: StudentDetail = new StudentDetail();
   fileDetail: Array<any> = [];
   imageIndex: number = 0;
-
+  studentId: number = 0;
   constructor(private fb: FormBuilder,
               private http: AjaxService,
               private nav: iNavigation){}
 
   ngOnInit(): void {
-    let data = this.nav.getValue();
+    let data:StudentDetail = this.nav.getValue();
     if(data){
-      this.studentDetail = data;
-      this.studentDetail.dateOfJoining = new Date(this.studentDetail.dateOfJoining);
-      this.model = { day: this.studentDetail.dateOfJoining.getDate(), month: this.studentDetail.dateOfJoining.getMonth() + 1, year: this.studentDetail.dateOfJoining.getFullYear()};
-      this.studentDetail.dateOfFeesPayment = new Date(this.studentDetail.dateOfFeesPayment);
-      this.DateOfFeesPaymentModel = { day: this.studentDetail.dateOfFeesPayment.getDate(), month: this.studentDetail.dateOfFeesPayment.getMonth() + 1, year: this.studentDetail.dateOfFeesPayment.getFullYear()};
-      this.studentDetail.refIdCardIssueDate = new Date(this.studentDetail.refIdCardIssueDate);
-      this.refIdCardIssueDateModel = { day: this.studentDetail.refIdCardIssueDate.getDate(), month: this.studentDetail.refIdCardIssueDate.getMonth() + 1, year: this.studentDetail.refIdCardIssueDate.getFullYear()};
-      if (data.filePath) {
-        this.profileURL = `${this.http.GetImageBasePath()}/${data.filePath}`
-      }
+      this.studentId = data.userId;
+      this.loadData()
+    }else{
+      this.initForm()
     }
-    this.initForm()
+  }
+
+  loadData(){
+    this.http.get(`studentDetail/getStudentDetailByUserId/${this.studentId}`).then((res:ResponseModel) => {
+      if(res.ResponseBody){
+        this.studentDetail = res.ResponseBody;
+        this.studentDetail.dateOfJoining = new Date(this.studentDetail.dateOfJoining);
+        this.model = { day: this.studentDetail.dateOfJoining.getDate(), month: this.studentDetail.dateOfJoining.getMonth() + 1, year: this.studentDetail.dateOfJoining.getFullYear()};
+        this.studentDetail.dateOfFeesPayment = new Date(this.studentDetail.dateOfFeesPayment);
+        this.DateOfFeesPaymentModel = { day: this.studentDetail.dateOfFeesPayment.getDate(), month: this.studentDetail.dateOfFeesPayment.getMonth() + 1, year: this.studentDetail.dateOfFeesPayment.getFullYear()};
+        this.studentDetail.refIdCardIssueDate = new Date(this.studentDetail.refIdCardIssueDate);
+        this.refIdCardIssueDateModel = { day: this.studentDetail.refIdCardIssueDate.getDate(), month: this.studentDetail.refIdCardIssueDate.getMonth() + 1, year: this.studentDetail.refIdCardIssueDate.getFullYear()};
+        if (res.ResponseBody.filePath) {
+          this.profileURL = `${this.http.GetImageBasePath()}/${res.ResponseBody.filePath}`
+        }
+        this.initForm()
+      }
+    })
   }
 
   addStudentDetail(){
