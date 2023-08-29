@@ -16,7 +16,7 @@ export class StudentComponent implements OnInit {
   orderByNameAsc: boolean = null;
   orderByMobileAsc: boolean = null;
   orderByEmailAsc: boolean = null;
-  studentDetail: Student = new Student();
+  studentDetail: StudentDetail = new StudentDetail();
   isLoading: boolean = false;
 
   constructor(private http: AjaxService,
@@ -40,6 +40,10 @@ export class StudentComponent implements OnInit {
     }).catch(e => {
       console.log(e.error);
     })
+  }
+
+  updateStudentDetail(item: StudentDetail){
+    this.nav.navigate(ManageStudent, item)
   }
 
   navManageStudent() {
@@ -82,7 +86,6 @@ export class StudentComponent implements OnInit {
     let searchQuery = "";
     let delimiter = "";
     this.studentData.SearchString = ""
-    this.studentData;
   }
 
   resetFilter() {
@@ -95,7 +98,7 @@ export class StudentComponent implements OnInit {
  
 }
 
-export class Student {
+export class StudentDetail {
   userId: number = 0;
   studentName: string = null;
   mobile: string = null;
@@ -111,4 +114,5 @@ export class Student {
   refIdCardIssueDate: Date = null;
   cardDeposit: boolean = null;
   remarks: string = null;
+  filePath: string = null;
 }
