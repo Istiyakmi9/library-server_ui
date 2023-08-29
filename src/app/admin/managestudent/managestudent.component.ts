@@ -70,7 +70,8 @@ export class ManagestudentComponent implements OnInit {
     let formData = new FormData();
     formData.append("studentDetail", JSON.stringify(value));
     if (this.fileDetail.length > 0)
-      formData.append("profile", this.fileDetail[0].file)
+      formData.append("profile", this.fileDetail[0].file);
+    
     this.http.put(`studentDetail/updateStudentDetail/${this.studentDetail.userId}`, formData).then((res:ResponseModel) => {
       if(res.ResponseBody) {
         alert("Data has been updated in StudentDetail");
