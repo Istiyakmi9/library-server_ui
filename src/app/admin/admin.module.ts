@@ -7,6 +7,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { StudentComponent } from './student/student.component';
 import { UtilModule } from '../util/util.module';
+import { ShiftComponent } from './shift/shift.component';
+import { ShiftdetailComponent } from './shiftdetail/shiftdetail.component';
 
 
 
@@ -14,7 +16,9 @@ import { UtilModule } from '../util/util.module';
   declarations: [
     DashboardComponent,
     ManagestudentComponent,
-    StudentComponent
+    StudentComponent,
+    ShiftComponent,
+    ShiftdetailComponent
   ],
   imports: [
     CommonModule,

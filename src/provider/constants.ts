@@ -6,9 +6,11 @@ export const JsonFormatter = "jsonformatter";
 export const TableSampleData = "tablesampledata";
 export const Home = "home";
 
-export const Dashboard = "admin/dashboard"
+export const Dashboard = "admin/dashboard";
 export const ManageStudent = 'admin/managestudent';
 export const Student = 'admin/student';
+export const Shift = 'admin/shift';
+export const ShiftDetails = 'admin/shiftdetail';
 
 export const LiveUrl = "liveurl";
 export const ApiKey = "AIzaSyAkFANPvmh1x_ajxADulhWiPcsNJHqw1Hs";
