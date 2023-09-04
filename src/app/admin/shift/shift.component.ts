@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ResponseModel } from 'src/auth/jwtService';
 import { AjaxService } from 'src/provider/ajax.service';
 import { ShiftDetails } from 'src/provider/constants';
 import { Filter, iNavigation } from 'src/provider/iNavigation';
@@ -10,6 +11,7 @@ import { Filter, iNavigation } from 'src/provider/iNavigation';
 })
 export class ShiftComponent implements OnInit {
 
+  allShift: Array<any> = [];
   isRecordFound: boolean = false;
   shiftData: Filter = new Filter();
   orderByTypeAsc: boolean = null;
@@ -23,7 +25,28 @@ export class ShiftComponent implements OnInit {
               private nav: iNavigation){}
 
   ngOnInit(): void {
-    
+    this.loadShiftData();
+  }
+
+  loadShiftData(){
+    this.isRecordFound = false;
+    this.isLoading = true;
+    this.http.get("shiftDetail/getAllShiftDetail").then((res:ResponseModel) => {
+      if(res.ResponseBody){
+        this.allShift = res.ResponseBody;
+        this.shiftData.TotalRecords = this.allShift.length;
+        this.isRecordFound = true;
+        this.isLoading = false;
+        console.log(this.allShift)
+      }
+    }).catch(e => {
+      console.log(e.error);
+    })
+  }
+
+
+  updateShiftDetail(item: ShiftDetail){
+    this.nav.navigate(ShiftDetails, item);
   }
 
   navShiftDetail(){
@@ -34,6 +57,8 @@ export class ShiftComponent implements OnInit {
   GetFilterResult(e: Filter) {
     if(e != null) {
       this.shiftData = e;
+      this.loadShiftData();
+      
       
     }
   }
@@ -84,6 +109,7 @@ export class ShiftComponent implements OnInit {
     this.shiftDetail.feesPerMonth= 0;
     this.shiftDetail.feesQuaterly= 0;
     this.shiftDetail.feesHalfYearly=0;
+    this.loadShiftData();
     
   }
 
