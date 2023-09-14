@@ -9,6 +9,7 @@ import { StudentComponent } from './student/student.component';
 import { UtilModule } from '../util/util.module';
 import { ShiftComponent } from './shift/shift.component';
 import { ShiftdetailComponent } from './shiftdetail/shiftdetail.component';
+import { MasterComponent } from './master/master.component';
 
 
 
@@ -18,7 +19,8 @@ import { ShiftdetailComponent } from './shiftdetail/shiftdetail.component';
     ManagestudentComponent,
     StudentComponent,
     ShiftComponent,
-    ShiftdetailComponent
+    ShiftdetailComponent,
+    MasterComponent
   ],
   imports: [
     CommonModule,

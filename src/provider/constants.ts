@@ -11,6 +11,7 @@ export const ManageStudent = 'admin/managestudent';
 export const Student = 'admin/student';
 export const Shift = 'admin/shift';
 export const ShiftDetails = 'admin/shiftdetail';
+export const MasterData = 'admin/master';
 
 export const LiveUrl = "liveurl";
 export const ApiKey = "AIzaSyAkFANPvmh1x_ajxADulhWiPcsNJHqw1Hs";

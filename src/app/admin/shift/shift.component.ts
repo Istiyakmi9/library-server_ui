@@ -20,12 +20,16 @@ export class ShiftComponent implements OnInit {
   orderByFeesHalfYearlyAsc: boolean = null;
   isLoading: boolean = false;
   shiftDetail: ShiftDetail = new ShiftDetail();
+  counts: Array<number> = [];
 
   constructor(private http: AjaxService,
               private nav: iNavigation){}
 
   ngOnInit(): void {
     this.loadShiftData();
+    for (let i = 0; i < 30; i++) {
+      this.counts.push(i+1);
+    }
   }
 
   loadShiftData(){
