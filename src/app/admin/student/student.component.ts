@@ -33,7 +33,7 @@ export class StudentComponent implements OnInit {
       if(res.ResponseBody){
         this.allStudent=res.ResponseBody;
         this.studentData.TotalRecords = this.allStudent.length;
-        this.isRecordFound = true; 
+        this.isRecordFound = true;
         this.isLoading = false;
         console.log(this.allStudent);
       }

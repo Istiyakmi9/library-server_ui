@@ -146,8 +146,6 @@ export class ManagestudentComponent implements OnInit {
   }
 
 
-
-
   initForm(){
     this.studentDetailForm = this.fb.group({
       studentName: new FormControl(this.studentDetail.studentName),

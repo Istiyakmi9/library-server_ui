@@ -1,0 +1,56 @@
+<div class="col-12 full-v main-container">
+    <div class="x_panel">
+        <div class="x_header">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="col-8">
+              <div class="px-1">
+                <app-breadcrums [title]="'Shift'" [subtitle]="'detail'"></app-breadcrums>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="x_content">
+            <div class="row mt-2 p-2 pe-3">
+                <form [formGroup]="shiftDetailForm" *ngIf="shiftDetailForm">
+                    <div class="col-12 row">
+                        <div class="col-md-9">
+                            <div class="row col-md-12">
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Type</label>
+                                    <input type="text" class="form-control" placeholder="Type" aria-label="Type" formControlName ="type"  >
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Fees Per Month</label>
+                                    <input type="number" class="form-control" placeholder="Fees Per Month" aria-label="Fees Per Month" formControlName="feesPerMonth">
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Fees Quaterly</label>
+                                    <input type="number" class="form-control" placeholder="Fees Quaterly" aria-label="Fees Quaterly" formControlName = "feesQuaterly" >
+                                </div>
+                            </div>
+                            <div class="row col-md-12 mt-3">
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Fees Half Yearly</label>
+                                    <input type="number" class="form-control" placeholder="Fees Half Yearly" aria-label="Fees Half Yearly" formControlName = "feesHalfYearly" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-end ps-2 me-4">
+                        <button type="submit" class="btn btn-danger me-2"><i class="fa fa-close pe-1"></i> Reset</button>
+                        <button class="btn btn-success" (click)="addShiftDetail()" *ngIf="shiftDetail.shiftId == 0" >
+                            <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-user-circle-o': !isLoading}"></i>
+                            {{ isLoading ? 'Wait' : 'Add' }}
+                        </button>
+                        <button class="btn btn-success" (click)="updateShiftDetail()" *ngIf="shiftDetail.shiftId > 0" >
+                            <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-user-circle-o': !isLoading}"></i>
+                            {{ isLoading ? 'Wait' : 'Update' }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+
