@@ -28,7 +28,11 @@
                     </div>
                     <div class="row align-items-center mb-5 mt-4">
                         <div class="d-grid col-md-6">
-                            <button class="btn btn-primary rounded-pill" (click)="login()"  type="submit">Login</button>
+                            <button class="btn btn-success" [disabled]="isLoading" (click)="login()">
+                                <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-sign-in': !isLoading}"></i>
+                                {{ isLoading ? 'Wait' : 'Login' }}
+                              </button>
+                            <!-- <button class="btn btn-primary rounded-pill" (click)="login()"  type="submit">Login</button> -->
                         </div>
                         <div class="d-grid col-md-6">
                             <a href="" class="text-decoration-none">Forget Password!</a>

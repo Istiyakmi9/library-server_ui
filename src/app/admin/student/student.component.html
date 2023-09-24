@@ -71,6 +71,34 @@
                     </div>
                   </div>
                 </div>
+                <div class="th fe-2">
+                  <div class="cell-wrapper">
+                    <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                      (keydown.esc)="resetFilter()" [(ngModel)]="studentDetail.seatNo"
+                      placeholder="Search by SeatNo">
+                    <div class="t-filter" (click)="arrangeDetails(orderBySeatNoAsc, 'SeatNo')">
+                      <a href="javascript:void()" class="pe-2">Seat No</a>
+                      <i class="fa fa-sort-amount-asc"
+                        [ngClass]="{'d-none': orderBySeatNoAsc == null || !orderBySeatNoAsc }" aria-hidden="true"></i>
+                      <i class="fa fa-sort-amount-desc"
+                        [ngClass]="{'d-none': orderBySeatNoAsc == null || orderBySeatNoAsc }" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="th fe-2">
+                  <div class="cell-wrapper">
+                    <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                      (keydown.esc)="resetFilter()" [(ngModel)]="studentDetail.dateOfJoining"
+                      placeholder="Search by DateOfJoining">
+                    <div class="t-filter" (click)="arrangeDetails(orderByDateOfJoiningAsc, 'DateOfJoining')">
+                      <a href="javascript:void()" class="pe-2">D.O.J</a>
+                      <i class="fa fa-sort-amount-asc"
+                        [ngClass]="{'d-none': orderBySeatNoAsc == null || !orderBySeatNoAsc }" aria-hidden="true"></i>
+                      <i class="fa fa-sort-amount-desc"
+                        [ngClass]="{'d-none': orderBySeatNoAsc == null || orderBySeatNoAsc }" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
                 <div class="th fe-1 text-center">ACTIONS</div>
               </div>
             </div>
@@ -95,6 +123,16 @@
                   <div class="td align-middle fe-2">
                     <div class="cell-wrapper">
                       {{student.email}}
+                    </div>
+                  </div>
+                  <div class="td align-middle fe-2">
+                    <div class="cell-wrapper">
+                      {{student.seatNo}}
+                    </div>
+                  </div>
+                  <div class="td align-middle fe-2">
+                    <div class="cell-wrapper">
+                      {{student.dateOfJoining | date}}
                     </div>
                   </div>
                   <div class="td align-middle text-center fe-1">

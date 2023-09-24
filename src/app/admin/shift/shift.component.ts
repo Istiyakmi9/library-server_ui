@@ -27,9 +27,7 @@ export class ShiftComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadShiftData();
-    for (let i = 0; i < 30; i++) {
-      this.counts.push(i+1);
-    }
+    
   }
 
   loadShiftData(){

@@ -31,11 +31,11 @@
                             <div class="row col-md-12">
                                 <div class="col-md-4">
                                     <label for="" class="form-label ps-2">Student Name</label>
-                                    <input type="text" class="form-control" placeholder="Student name" aria-label="Student name" formControlName="studentName" >
+                                    <input type="text" class="form-control" oninput="this.value = this.value.toUpperCase()" placeholder="Student name" aria-label="Student name" formControlName="studentName" >
                                 </div>
                                 <div class="col-md-4">
                                     <label for="" class="form-label ps-2">Mobile No</label>
-                                    <input type="text" class="form-control" placeholder="Mobile no" aria-label="Mobile no" formControlName="mobile" >
+                                    <input type="text" class="form-control" oninput="this.value = this.value.toUpperCase()" placeholder="Mobile no" aria-label="Mobile no" formControlName="mobile" >
                                 </div>
                                 <div class="col-md-4">
                                     <label for="" class="form-label ps-2">Email Id</label>
@@ -64,7 +64,7 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label for="" class="form-label ps-2">Locker No</label>
-                                    <input type="text" class="form-control" placeholder="Locker no" aria-label="Locker no" formControlName="lockerNo" >
+                                    <input type="text" class="form-control" oninput="this.value = this.value.toUpperCase()" placeholder="Locker no" aria-label="Locker no" formControlName="lockerNo" >
                                 </div>
                             </div>
                             <div class="row col-md-12 mt-3">
@@ -118,7 +118,7 @@
                             <div class="row col-md-12">
                                 <div class="col-md-6">
                                     <label for="" class="form-label ps-2">Seat No</label>
-                                    <input type="text" class="form-control" placeholder="Seat no" aria-label="Seat no" formControlName="seatNo" >
+                                    <input type="text" class="form-control" oninput="this.value = this.value.toUpperCase()" placeholder="Seat no" aria-label="Seat no" formControlName="seatNo" >
                                 </div>
                                 <div class="col-md-6">
                                     <label for="" class="form-label ps-2">Card Deposit</label>
@@ -175,7 +175,7 @@
                         </div>
                         <div class="col-md-6">
                             <label for="" class="form-label ps-2">Remarks</label>
-                            <textarea class="form-control" rows="5" placeholder="Leave a comment here"  formControlName="remarks"></textarea>
+                            <textarea class="form-control" rows="5" oninput="this.value = this.value.toUpperCase()" placeholder="Leave a comment here"  formControlName="remarks"></textarea>
                         </div>
                     </div>
                     <div class="mt-4 text-end ps-2 me-4">
