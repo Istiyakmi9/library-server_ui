@@ -99,6 +99,20 @@
                     </div>
                   </div>
                 </div>
+                <div class="th fe-2">
+                  <div class="cell-wrapper">
+                    <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                      (keydown.esc)="resetFilter()" [(ngModel)]="studentDetail.refIdCardIssued"
+                      placeholder="Search by RefIdCardIssued">
+                    <div class="t-filter" (click)="arrangeDetails(orderByRefIdCardIssuedAsc, 'RefIdCardIssued')">
+                      <a href="javascript:void()" class="pe-2">Ref Id Card Isuued</a>
+                      <i class="fa fa-sort-amount-asc"
+                        [ngClass]="{'d-none': orderByRefIdCardIssuedAsc == null || !orderByRefIdCardIssuedAsc }" aria-hidden="true"></i>
+                      <i class="fa fa-sort-amount-desc"
+                        [ngClass]="{'d-none': orderByRefIdCardIssuedAsc == null || orderByRefIdCardIssuedAsc }" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
                 <div class="th fe-1 text-center">ACTIONS</div>
               </div>
             </div>
@@ -133,6 +147,11 @@
                   <div class="td align-middle fe-2">
                     <div class="cell-wrapper">
                       {{student.dateOfJoining | date}}
+                    </div>
+                  </div>
+                  <div class="td align-middle fe-2">
+                    <div class="cell-wrapper">
+                      {{student.refIdCardIssued}}
                     </div>
                   </div>
                   <div class="td align-middle text-center fe-1">

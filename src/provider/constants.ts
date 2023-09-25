@@ -13,7 +13,7 @@ export const Shift = 'admin/shift';
 export const ShiftDetails = 'admin/shiftdetail';
 export const MasterData = 'admin/master';
 export const SeatData = 'admin/seat';
-
+export const Payment = 'admin/payment';
 export const LiveUrl = "liveurl";
 export const ApiKey = "AIzaSyAkFANPvmh1x_ajxADulhWiPcsNJHqw1Hs";
 export const AccessTokenExpiredOn = "access_token_expired_on";

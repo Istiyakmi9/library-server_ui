@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResponseModel } from 'src/auth/jwtService';
 import { AjaxService } from 'src/provider/ajax.service';
+import { Toast } from 'src/provider/common-service/common.service';
 import { ShiftDetails } from 'src/provider/constants';
 import { Filter, iNavigation } from 'src/provider/iNavigation';
 
@@ -39,7 +40,8 @@ export class ShiftComponent implements OnInit {
         this.shiftData.TotalRecords = this.allShift.length;
         this.isRecordFound = true;
         this.isLoading = false;
-        console.log(this.allShift)
+        // console.log(this.allShift)
+        Toast("Data loaded successfully")
       }
     }).catch(e => {
       console.log(e.error);

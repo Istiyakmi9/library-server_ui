@@ -66,8 +66,8 @@ export class ManagestudentComponent implements OnInit {
       formData.append("profile", this.fileDetail[0].file)
     this.http.post("studentDetail/addStudentDetail", formData).then((res:ResponseModel) => {
       if(res.ResponseBody) {
-        alert("Data has been added in StudentDetail");
-        this.nav.navigate(Student, null);
+        // alert("Data has been added in StudentDetail");
+        $('#messageModal').modal('show');
         this.isLoading = false;
       }
     }).catch(e => {
@@ -85,8 +85,8 @@ export class ManagestudentComponent implements OnInit {
     
     this.http.put(`studentDetail/updateStudentDetail/${this.studentDetail.userId}`, formData).then((res:ResponseModel) => {
       if(res.ResponseBody) {
-        alert("Data has been updated in StudentDetail");
-        this.nav.navigate(Student, null);
+        // alert("Data has been updated in StudentDetail");
+        $('#messageModal').modal('show');
         this.isLoading = false;
       }
     }).catch(e => {
@@ -164,6 +164,11 @@ export class ManagestudentComponent implements OnInit {
       remarks: new FormControl(this.studentDetail.remarks)
 
     })
+  }
+
+  goToStudent(){
+    $('#messageModal').modal('hide');
+    this.nav.navigate(Student, null)
   }
 
 }

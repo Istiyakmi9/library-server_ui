@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ResponseModel } from 'src/auth/jwtService';
 import { AjaxService } from 'src/provider/ajax.service';
+import { Toast } from 'src/provider/common-service/common.service';
 import { ManageStudent } from 'src/provider/constants';
 import { Filter, iNavigation } from 'src/provider/iNavigation';
 
@@ -18,6 +19,7 @@ export class StudentComponent implements OnInit {
   orderByEmailAsc: boolean = null;
   orderBySeatNoAsc: boolean = null;
   orderByDateOfJoiningAsc: boolean = null;
+  orderByRefIdCardIssuedAsc: boolean = null;
   studentDetail: StudentDetail = new StudentDetail();
   isLoading: boolean = false;
 
@@ -37,7 +39,8 @@ export class StudentComponent implements OnInit {
         this.studentData.TotalRecords = this.allStudent.length;
         this.isRecordFound = true;
         this.isLoading = false;
-        console.log(this.allStudent);
+        // console.log(this.allStudent);
+        Toast("Data loaded successfully")
       }
     }).catch(e => {
       console.log(e.error);
@@ -72,12 +75,14 @@ export class StudentComponent implements OnInit {
       this.orderByEmailAsc = null;
       this.orderBySeatNoAsc = null;
       this.orderByDateOfJoiningAsc = null;
+      this.orderByRefIdCardIssuedAsc = null;
     } else if (FieldName == 'Mobile') {
       this.orderByMobileAsc = !flag;
       this.orderByEmailAsc = null;
       this.orderByNameAsc = null;
       this.orderBySeatNoAsc = null;
       this.orderByDateOfJoiningAsc = null;
+      this.orderByRefIdCardIssuedAsc = null;
     }
     else if (FieldName == 'Email') {
       this.orderByEmailAsc = !flag;
@@ -85,20 +90,34 @@ export class StudentComponent implements OnInit {
       this.orderByMobileAsc = null;
       this.orderBySeatNoAsc = null;
       this.orderByDateOfJoiningAsc = null;
+      this.orderByRefIdCardIssuedAsc = null;
     } else if (FieldName == 'SeatNo') {
       this.orderBySeatNoAsc = !flag;
       this.orderByEmailAsc = null;
       this.orderByNameAsc = null;
       this.orderByMobileAsc = null;
       this.orderByDateOfJoiningAsc = null;
+      this.orderByRefIdCardIssuedAsc = null;
       
-    } if (FieldName == 'DateOfJoining') {
+    } else if (FieldName == 'DateOfJoining') {
       this.orderByDateOfJoiningAsc = !flag;
       this.orderBySeatNoAsc = null;
       this.orderByEmailAsc = null;
       this.orderByNameAsc = null;
       this.orderByMobileAsc = null;
       this.orderByDateOfJoiningAsc = null;
+      this.orderByRefIdCardIssuedAsc = null;
+      
+    }
+    if (FieldName == 'RefIdCardIssued') {
+      this.orderByRefIdCardIssuedAsc = !flag;
+      this.orderByDateOfJoiningAsc = null;
+      this.orderBySeatNoAsc = null;
+      this.orderByEmailAsc = null;
+      this.orderByNameAsc = null;
+      this.orderByMobileAsc = null;
+      this.orderByDateOfJoiningAsc = null;
+      
       
     }
 
@@ -119,6 +138,7 @@ export class StudentComponent implements OnInit {
     this.studentDetail.email="";
     this.studentDetail.seatNo=null;
     this.studentDetail.dateOfJoining = null;
+    this.studentDetail.refIdCardIssued = null;
     this.loadStudentData();
   }
  
