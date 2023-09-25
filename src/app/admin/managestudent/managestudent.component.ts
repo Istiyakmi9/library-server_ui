@@ -161,7 +161,8 @@ export class ManagestudentComponent implements OnInit {
       refIdCardIssued: new FormControl(this.studentDetail.refIdCardIssued),
       refIdCardIssueDate: new FormControl(this.studentDetail.refIdCardIssueDate),
       cardDeposit: new FormControl(this.studentDetail.cardDeposit),
-      remarks: new FormControl(this.studentDetail.remarks)
+      remarks: new FormControl(this.studentDetail.remarks),
+      userRoleId: new FormControl(this.studentDetail.userRoleId)
 
     })
   }
