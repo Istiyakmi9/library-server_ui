@@ -160,5 +160,6 @@ export class StudentDetail {
   refIdCardIssueDate: Date = null;
   cardDeposit: boolean = null;
   remarks: string = null;
+  userRoleId: number = null;
   filePath: string = null;
 }

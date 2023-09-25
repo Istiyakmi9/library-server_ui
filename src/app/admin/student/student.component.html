@@ -141,7 +141,7 @@
                   </div>
                   <div class="td align-middle fe-2">
                     <div class="cell-wrapper">
-                      {{student.seatNo}}
+                      <span class="badge text-bg-primary rounded-pill">{{student.seatNo}}</span>
                     </div>
                   </div>
                   <div class="td align-middle fe-2">
@@ -151,7 +151,8 @@
                   </div>
                   <div class="td align-middle fe-2">
                     <div class="cell-wrapper">
-                      {{student.refIdCardIssued}}
+                      <span class="badge text-bg-success rounded-pill" *ngIf="student.refIdCardIssued">Yes</span>
+                      <span class="badge text-bg-warning rounded-pill" *ngIf="!student.refIdCardIssued">No</span>
                     </div>
                   </div>
                   <div class="td align-middle text-center fe-1">
