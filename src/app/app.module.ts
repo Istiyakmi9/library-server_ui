@@ -12,12 +12,14 @@ import { AjaxService } from 'src/provider/ajax.service';
 import { JwtService } from 'src/auth/jwtService';
 import { iNavigation } from 'src/provider/iNavigation';
 import {HttpClientModule } from '@angular/common/http';
+import { ToastComponent } from './toast/toast.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    ToastComponent
   ],
   imports: [
     BrowserModule,

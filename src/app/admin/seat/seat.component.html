@@ -1,0 +1,9 @@
+<div class="row col-md-12 p-5 m-5">
+    <label class="fs-2 fw-bold  ps-10 text-center" for="">Select your Seat</label>
+    <div *ngIf="counts.length > 0" class="col-md-12">
+        <ng-container *ngFor="let item of counts">
+          <span class="badge bg-secondary boxsize py-auto">{{item}}</span>
+        </ng-container>
+      </div>
+
+</div>

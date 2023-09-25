@@ -10,6 +10,8 @@ import { UtilModule } from '../util/util.module';
 import { ShiftComponent } from './shift/shift.component';
 import { ShiftdetailComponent } from './shiftdetail/shiftdetail.component';
 import { MasterComponent } from './master/master.component';
+import { SeatComponent } from './seat/seat.component';
+import { PaymentComponent } from './payment/payment.component';
 
 
 
@@ -20,7 +22,9 @@ import { MasterComponent } from './master/master.component';
     StudentComponent,
     ShiftComponent,
     ShiftdetailComponent,
-    MasterComponent
+    MasterComponent,
+    SeatComponent,
+    PaymentComponent
   ],
   imports: [
     CommonModule,

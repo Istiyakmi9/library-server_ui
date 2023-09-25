@@ -26,9 +26,15 @@
                 </a>
             </li>
             <li>
-                <a href="javascript:void(0)" class="text-decoration-none ps-4">
-                    <span class="icon"><i class="fa fa-chart-line"></i></span>
-                    <span class="icon">Reports</span>
+                <a href="javascript:void(0)" class="text-decoration-none ps-4" [routerLink]="['/admin/seat']" routerLinkActive="active" >
+                    <span class="icon"><i class="fa fa-table"></i></span>
+                    <span class="icon">Seat</span>
+                </a>
+            </li>
+            <li>
+                <a href="javascript:void(0)" class="text-decoration-none ps-4" [routerLink]="['/admin/payment']" routerLinkActive="active" >
+                    <span class="icon"><i class="fa fa-inr"></i></span>
+                    <span class="icon">Payment</span>
                 </a>
             </li>
             <li>

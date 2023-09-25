@@ -4,7 +4,8 @@ import { AjaxService } from 'src/provider/ajax.service';
 import { iNavigation } from 'src/provider/iNavigation';
 import { ShiftDetail } from '../shift/shift.component';
 import { ResponseModel } from 'src/auth/jwtService';
-import { Shift } from 'src/provider/constants';
+import { Shift, ShiftDetails } from 'src/provider/constants';
+declare var $: any;
 
 @Component({
   selector: 'app-shiftdetail',
@@ -47,8 +48,9 @@ export class ShiftdetailComponent implements OnInit {
     let value = this.shiftDetailForm.value;
     this.http.post("shiftDetail/addShiftDetail", value).then((res:ResponseModel) => {
       if(res.ResponseBody){
-        alert("Data has been added in the ShiftDetail");
-        this.nav.navigate(Shift, null);
+        // alert("Data has been added in the ShiftDetail");
+        $('#messageModalShift').modal('show');
+        // this.nav.navigate(Shift, null);
         this.isLoading = false;
       }
     }).catch(e => {
@@ -61,8 +63,9 @@ export class ShiftdetailComponent implements OnInit {
     let value = this.shiftDetailForm.value;
     this.http.put(`shiftDetail/updateShiftDetail/${this.shiftDetail.shiftId}`, value).then((res:ResponseModel) => {
       if(res.ResponseBody){
-        alert("Data has been updated in ShiftDetail");
-        this.nav.navigate(Shift, null);
+        // alert("Data has been updated in ShiftDetail");
+        // this.nav.navigate(Shift, null);
+        $('#messageModalShift').modal('show');
         this.isLoading = false;
       }
     }).catch(e => {
@@ -78,6 +81,11 @@ export class ShiftdetailComponent implements OnInit {
       feesQuaterly: new FormControl(this.shiftDetail.feesQuaterly),
       feesHalfYearly: new FormControl(this.shiftDetail.feesHalfYearly)
     })
+  }
+
+  goToShift(){
+    $('#messageModalShift').modal('hide');
+    this.nav.navigate(Shift, null)
   }
 
 }
