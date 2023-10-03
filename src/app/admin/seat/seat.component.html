@@ -2,10 +2,21 @@
   <div class="col-md-10 d-flex flex-wrap" id="box-container">
     <span class="sample-box" draggableNode *ngFor="let item of list">Drag me around</span>
   </div>
-  <div class="col-md-2 bg-white shadow"  (dragover)="allowDrop($event)">
-    <div class="sample-box position-fixed">Drag me around</div>
-    <div class="sample-box" draggableNode (dragleave)="dragleaveEvent()">Drag me around</div>
-  </div>
+  <ng-container *ngIf="isFormReady">
+    <div class="col-md-2 bg-white shadow" (dragover)="allowDrop($event)">
+      <div class="sample-box position-absolute">Drag me around</div>
+      <div [formGroup]="dragForm">
+        <ng-container formArrayName="chairs">
+          <ng-container *ngFor="let item of getArray().controls; let i = index " [formGroupName]="i">
+            <div tag="fresh-draggable" class="sample-box sample-box position-absolute" 
+                [attr.name]="i" (mouseup)="addChair(i)" draggableNode>
+              Chair [{{i}}]
+            </div>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </ng-container>
 </div>
 
 <!-- <form [formGroup]="dragForm">

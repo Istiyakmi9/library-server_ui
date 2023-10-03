@@ -10,10 +10,14 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class SeatComponent implements OnInit{
   dragForm: FormGroup;
   list: Array<number> = [];
+  isFormReady = false;
+  freshChairIndex = 0;
+
   constructor(private fb: FormBuilder){};
 
   ngOnInit(): void {
-    this.list.push(0)
+    this.initForm();
+    this.isFormReady = true;
   }
 
   allowDrop(event) {
@@ -48,14 +52,15 @@ export class SeatComponent implements OnInit{
     })
   }
 
-  addChair() {
-    let groupArray = this.dragForm.get("chairs") as FormArray;
-    groupArray.push(this.buildChairArray);
+  addChair(chairIndex: number) {
+    if(this.freshChairIndex == chairIndex) {
+      this.freshChairIndex++;
+      let groupArray = this.dragForm.get("chairs") as FormArray;
+      groupArray.push(this.buildChairArray);
+    }
   }
 
   getArray(): FormArray {
     return  (<FormArray>this.dragForm.get("chairs"));
   }
-
-
 }

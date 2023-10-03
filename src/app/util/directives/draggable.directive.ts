@@ -26,10 +26,6 @@ export class DraggingNodeDirective implements OnInit, OnDestroy {
         this.subscriptions.forEach((s) => s?.unsubscribe());
     }
 
-    dragleaveEvent() {
-        alert("working");
-    }
-
     initDrag(): void {
         // 1
         const dragStart$ = fromEvent<MouseEvent>(this.element, "mousedown");
@@ -73,7 +69,7 @@ export class DraggingNodeDirective implements OnInit, OnDestroy {
                 dragSub.unsubscribe();
             }
 
-            alert("working");
+            //alert("working in directive inidDrag");
         });
 
         // 6
