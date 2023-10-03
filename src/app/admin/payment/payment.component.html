@@ -1,1 +1,140 @@
-<p>payment works!</p>
+<div class="col-12 full-v main-container" [ngClass]="{'preload': isLoading}">
+  <div class="x_panel">
+      <div class="x_header">
+      <div class="d-flex justify-content-between align-items-center">
+        <div class="col-8">
+          <div class="px-1">
+            <app-breadcrums [title]="'Payment'" [subtitle]="'Add or update Payment'"></app-breadcrums>
+          </div>
+        </div>
+        <div class="col-4 text-end">
+          <button class="btn btn-primary-c float-end" (click)="navPaymentDetail()"  ><i class="fa fa-plus pe-2"></i> Add Payment</button>
+        </div>
+      </div>
+    </div>
+    <div [ngSwitch]="isLoading">
+      <div *ngSwitchCase="true">
+        <div class="mt-5">
+          <app-pre-load-table></app-pre-load-table>
+        </div>
+      </div>
+      <div *ngSwitchDefault>
+        <div class="x_content">
+          <div class="t-table t-list t-border col-md-12">
+            <div class="hide-bar"></div>
+            <div class="t-head">
+              <div class="tr">
+                <div class="th fe-index">
+                  <div class="t-index">
+                    <a href="javascript:void()" class="ps-3">Sno.</a>
+                  </div>
+                </div>
+                <div class="th fe-5">
+                  <div class="cell-wrapper">
+                    <input class="form-control form-control-sm" (keydown.esc)="resetFilter()"
+                      (keyup.enter)="filterRecords()" autofocus [(ngModel)]="paymentDetail.month"
+                      placeholder="Search by Month" id="typefilter">
+                    <div class="t-filter" (click)="arrangeDetails(orderByMonthAsc, 'Month')">
+                      <a href="javascript:void()" class="pe-2">Month</a>
+                      <i class="fa fa-sort-amount-asc"
+                        [ngClass]="{'d-none': orderByMonthAsc == null || !orderByMonthAsc }" aria-hidden="true"></i>
+                      <i class="fa fa-sort-amount-desc"
+                        [ngClass]="{'d-none': orderByMonthAsc == null || orderByMonthAsc }" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="th fe-2">
+                  <div class="cell-wrapper">
+                    <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                      (keydown.esc)="resetFilter()" [(ngModel)]="paymentDetail.year" placeholder="Search by Year">
+                    <div class="t-filter" (click)="arrangeDetails(orderByYearAsc, 'Year')">
+                      <a href="javascript:void()" class="pe-2">Year</a>
+                      <i class="fa fa-sort-amount-asc"
+                        [ngClass]="{'d-none': orderByYearAsc == null || !orderByYearAsc }" aria-hidden="true"></i>
+                      <i class="fa fa-sort-amount-desc"
+                        [ngClass]="{'d-none': orderByYearAsc == null || orderByYearAsc }" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="th fe-2">
+                  <div class="cell-wrapper">
+                    <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                      (keydown.esc)="resetFilter()" [(ngModel)]="paymentDetail.paymentMode"
+                      placeholder="Search by PaymentMode">
+                    <div class="t-filter" (click)="arrangeDetails(orderByPaymentModeAsc, 'PaymentMode')">
+                      <a href="javascript:void()" class="pe-2">PaymentMode</a>
+                      <i class="fa fa-sort-amount-asc"
+                        [ngClass]="{'d-none': orderByPaymentModeAsc == null || !orderByPaymentModeAsc }"
+                        aria-hidden="true"></i>
+                      <i class="fa fa-sort-amount-desc"
+                        [ngClass]="{'d-none': orderByPaymentModeAsc == null || orderByPaymentModeAsc }"
+                        aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="th fe-2">
+                  <div class="cell-wrapper">
+                    <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                      this.paymentDetail.amount=0; (keydown.esc)="resetFilter()" [(ngModel)]="paymentDetail.amount"
+                      placeholder="Search by Amount">
+                    <div class="t-filter" (click)="arrangeDetails(orderByAmountAsc, 'Amount')">
+                      <a href="javascript:void()" class="pe-2">Amount</a>
+                      <i class="fa fa-sort-amount-asc"
+                        [ngClass]="{'d-none': orderByAmountAsc == null || !orderByAmountAsc }" aria-hidden="true"></i>
+                      <i class="fa fa-sort-amount-desc"
+                        [ngClass]="{'d-none': orderByAmountAsc == null || orderByAmountAsc }" aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="th fe-1 text-center">ACTIONS</div>
+              </div>
+            </div>
+            <div class="t-body">
+              <ng-container *ngIf="isRecordFound">
+                <div class="tr py-2" *ngFor="let student of allStudent; let i = index;">
+                  <div class="td align-middle text-center fe-index">
+                    <div class="cell-wrapper">
+                      {{i + 1}}
+                    </div>
+                  </div>
+                  <div class="td align-middle fe-5">
+                    <div class="cell-wrapper">
+                      {{paymentDetail.month}}
+                    </div>
+                  </div>
+                  <div class="td align-middle fe-2">
+                    <div class="cell-wrapper">
+                      {{paymentDetail.year}}
+                    </div>
+                  </div>
+                  <div class="td align-middle fe-2">
+                    <div class="cell-wrapper">
+                      {{paymentDetail.paymentMode}}
+                    </div>
+                  </div>
+                  <div class="td align-middle text-center fe-1">
+                    <a href="javascript:void(0)" class="text-deccoration-none">
+                      <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                    </a>
+                    <a href="javascript:void(0)" class="text-deccoration-none ms-2 ">
+                      <i class="fa fa-trash-o ps-2 text-danger" aria-hidden="true"></i>
+                    </a>
+                  </div>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="!isRecordFound">
+                <div
+                  class="custom-height my-5 py-5 fw-bold fs-3 text-danger d-flex align-items-center justify-content-center">
+                  <p class="my-5 py-5">Record Not Found</p>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mt-3" *ngIf="!isLoading">
+      <app-pagination [pagination]="paymentData" (onPageChange)="GetFilterResult($event)"></app-pagination>
+    </div>
+  </div>

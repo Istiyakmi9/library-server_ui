@@ -1,0 +1,148 @@
+<div class="col-12 full-v main-container" [ngClass]="{'preload': isLoading}">
+    <div class="x_panel">
+        <div class="x_header">
+        <div class="d-flex justify-content-between align-items-center">
+          <div class="col-8">
+            <div class="px-1">
+              <app-breadcrums [title]="'Subscription'" [subtitle]="'Add or update Subscription'"></app-breadcrums>
+            </div>
+          </div>
+          <div class="col-4 text-end">
+            <button class="btn btn-primary-c float-end" (click)="navSubscriptionPlanDetail()"  ><i class="fa fa-plus pe-2"></i> Add Subscription</button>
+          </div>
+        </div>
+      </div>
+      <div [ngSwitch]="isLoading">
+        <div *ngSwitchCase="true">
+          <div class="mt-5">
+            <app-pre-load-table></app-pre-load-table>
+          </div>
+        </div>
+        <div *ngSwitchDefault>
+          <div class="x_content">
+            <div class="t-table t-list t-border col-md-12">
+              <div class="hide-bar"></div>
+              <div class="t-head">
+                <div class="tr">
+                  <div class="th fe-index">
+                    <div class="t-index">
+                      <a href="javascript:void()" class="ps-3">Sno.</a>
+                    </div>
+                  </div>
+                  <div class="th fe-5">
+                    <div class="cell-wrapper">
+                      <input class="form-control form-control-sm" (keydown.esc)="resetFilter()"
+                        (keyup.enter)="filterRecords()" autofocus [(ngModel)]="subscriptionPlanDetail.subscriptionName"
+                        placeholder="Search by SubscriptionName" id="typefilter">
+                      <div class="t-filter" (click)="arrangeDetails(orderBySubscriptionNameAsc, 'SubscriptionName')">
+                        <a href="javascript:void()" class="pe-2">Subscription Name</a>
+                        <i class="fa fa-sort-amount-asc"
+                          [ngClass]="{'d-none': orderBySubscriptionNameAsc == null || !orderBySubscriptionNameAsc }" aria-hidden="true"></i>
+                        <i class="fa fa-sort-amount-desc"
+                          [ngClass]="{'d-none': orderBySubscriptionNameAsc == null || orderBySubscriptionNameAsc }" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+  
+                  <div class="th fe-2">
+                    <div class="cell-wrapper">
+                      <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                        (keydown.esc)="resetFilter()" [(ngModel)]="subscriptionPlanDetail.subscriptionDescription" placeholder="Search by SubscriptionDescription">
+                      <div class="t-filter" (click)="arrangeDetails(orderBySubscriptionDescriptionAsc, 'SubscriptionDescription')">
+                        <a href="javascript:void()" class="pe-2">Subscription Description</a>
+                        <i class="fa fa-sort-amount-asc"
+                          [ngClass]="{'d-none': orderBySubscriptionDescriptionAsc == null || !orderBySubscriptionDescriptionAsc }" aria-hidden="true"></i>
+                        <i class="fa fa-sort-amount-desc"
+                          [ngClass]="{'d-none': orderBySubscriptionDescriptionAsc == null || orderBySubscriptionDescriptionAsc }" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="th fe-2">
+                    <div class="cell-wrapper">
+                      <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                        (keydown.esc)="resetFilter()" [(ngModel)]="subscriptionPlanDetail.numberOfMonths"
+                        placeholder="Search by NumberOfMonths">
+                      <div class="t-filter" (click)="arrangeDetails(orderByNumberOfMonthsAsc, 'NumberOfMonths')">
+                        <a href="javascript:void()" class="pe-2">Number Of Months</a>
+                        <i class="fa fa-sort-amount-asc"
+                          [ngClass]="{'d-none': orderByNumberOfMonthsAsc == null || !orderByNumberOfMonthsAsc }"
+                          aria-hidden="true"></i>
+                        <i class="fa fa-sort-amount-desc"
+                          [ngClass]="{'d-none': orderByNumberOfMonthsAsc == null || orderByNumberOfMonthsAsc }"
+                          aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="th fe-2">
+                    <div class="cell-wrapper">
+                      <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
+                        this.paymentDetail.amount=0; (keydown.esc)="resetFilter()" [(ngModel)]="subscriptionPlanDetail.monthlyAmount"
+                        placeholder="Search by MonthlyAmount">
+                      <div class="t-filter" (click)="arrangeDetails(orderByMonthlyAmountAsc, 'MonthlyAmount')">
+                        <a href="javascript:void()" class="pe-2">Monthly Amount</a>
+                        <i class="fa fa-sort-amount-asc"
+                          [ngClass]="{'d-none': orderByMonthlyAmountAsc == null || !orderByMonthlyAmountAsc }" aria-hidden="true"></i>
+                        <i class="fa fa-sort-amount-desc"
+                          [ngClass]="{'d-none': orderByMonthlyAmountAsc == null || orderByMonthlyAmountAsc }" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="th fe-1 text-center">ACTIONS</div>
+                </div>
+              </div>
+              <div class="t-body">
+                <ng-container *ngIf="isRecordFound">
+                  <div class="tr py-2" *ngFor="let subscription of allSubscription; let i = index;">
+                    <div class="td align-middle text-center fe-index">
+                      <div class="cell-wrapper">
+                        {{i + 1}}
+                      </div>
+                    </div>
+                    <div class="td align-middle fe-5">
+                      <div class="cell-wrapper">
+                        {{subscription.subscriptionName}}
+                      </div>
+                    </div>
+                    <div class="td align-middle fe-2">
+                      <div class="cell-wrapper">
+                        {{subscription.subscriptionDescription}}
+                      </div>
+                    </div>
+                    <div class="td align-middle fe-2">
+                      <div class="cell-wrapper">
+                        {{subscription.numberOfMonths}}
+                      </div>
+                    </div>
+                    <div class="td align-middle fe-2">
+                      <div class="cell-wrapper">
+                        {{subscription.monthlyAmount}}
+                      </div>
+                    </div>
+                    <div class="td align-middle text-center fe-1">
+                      <a href="javascript:void(0)" class="text-deccoration-none">
+                        <i class="fa fa-pencil text-primary" (click)="updateSubscriptionDetail(subscription)" aria-hidden="true"></i>
+                      </a>
+                      <a href="javascript:void(0)" class="text-deccoration-none ms-2 ">
+                        <i class="fa fa-trash-o ps-2 text-danger" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </ng-container>
+                <ng-container *ngIf="!isRecordFound">
+                  <div
+                    class="custom-height my-5 py-5 fw-bold fs-3 text-danger d-flex align-items-center justify-content-center">
+                    <p class="my-5 py-5">Record Not Found</p>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mt-3" *ngIf="!isLoading">
+        <app-pagination [pagination]="subscriptionData" (onPageChange)="GetFilterResult($event)"></app-pagination>
+      </div>
+    </div>
+
+
+

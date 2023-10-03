@@ -28,7 +28,6 @@ export class ShiftComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadShiftData();
-    
   }
 
   loadShiftData(){
@@ -48,7 +47,6 @@ export class ShiftComponent implements OnInit {
     })
   }
 
-
   updateShiftDetail(item: ShiftDetail){
     this.nav.navigate(ShiftDetails, item);
   }
@@ -62,7 +60,6 @@ export class ShiftComponent implements OnInit {
     if(e != null) {
       this.shiftData = e;
       this.loadShiftData();
-      
       
     }
   }

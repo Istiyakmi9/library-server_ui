@@ -1,0 +1,123 @@
+<!-- <p>subscriptionplan-detail works!</p> -->
+<div class="col-12 full-v main-container">
+    <div class="x_panel">
+        <div class="x_header">
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="col-8">
+              <div class="px-1">
+                <app-breadcrums [title]="'Payment'" [subtitle]="'detail'"></app-breadcrums>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="x_content">
+            <div class="row mt-2 p-2 pe-3">
+                <form [formGroup]="subscriptionPlanDetailForm" *ngIf="subscriptionPlanDetailForm">
+                    <div class="col-12 row">
+                        <div class="col-md-9">
+                            <div class="row col-md-12">
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Subscription Name</label>
+                                    <input type="text" class="form-control" placeholder="Subscription Name" aria-label="SubscriptionName" formControlName ="subscriptionName" >
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2">Subscription Description</label>
+                                    <input type="text" class="form-control" placeholder="Subscription Description" aria-label="SubscriptionDescription" formControlName="subscriptionDescription">
+                                </div>
+                                <div class="col-md-4">
+                                  <div>
+                                    <label for="" class="form-label ps-2">is Monthly Subscription</label>
+
+                                  </div>
+                                    <!-- <input type="text" class="form-control" placeholder="isMonthly Subscription" aria-label="is Monthly Subscription" formControlName = "isMonthlySubscription" > -->
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                      <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                      <label class="form-check-label" for="inlineRadio2">No</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-md-12 mt-3">
+                                <div class="col-md-4">
+                                    <label for="" class="form-label ps-2"> Number Of Months</label>
+                                    <input type="number" class="form-control" placeholder="numberOfMonths" aria-label="numberOfMonths" formControlName = "numberOfMonths" >
+                                </div>
+                                <div class="col-md-4">
+                                  <label for="" class="form-label ps-2">Monthly Amount</label>
+                                  <input type="number" class="form-control" placeholder="Monthly Amount" aria-label="Monthly Amount" formControlName = "monthlyAmount" >
+                              </div>
+                              <div class="col-md-4">
+                                <div>
+                                  <label for="" class="form-label ps-2">is Hourly Subscription</label>
+                                </div>
+                                <!-- <input type="text" class="form-control" placeholder="ReferenceLink" aria-label="isHourlySubscription" formControlName = "isHourlySubscription" > -->
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                  <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                  <label class="form-check-label" for="inlineRadio2">No</label>
+                                </div>
+                              
+                              </div>
+                            </div>
+                          
+                          <div class="row col-md-12 mt-3">
+                            <div class="col-md-4">
+                                <label for="" class="form-label ps-2"> Hourly Amount</label>
+                                <input type="number" class="form-control" placeholder="Hourly Amount" aria-label="hourly Amount" formControlName = "hourlyAmount" >
+                            </div>
+                            <div class="col-md-4">
+                              <label for="" class="form-label ps-2">Number Of Hours</label>
+                              <input type="number" class="form-control" placeholder="Number Of Hours" aria-label="PaymentDate" formControlName = "numberOfHours" >
+                            </div>
+                            <div class="col-md-4">
+                              <label for="" class="form-label ps-2">Final Amount Per Month</label>
+                              <input type="number" class="form-control" placeholder="FinalAmountPerMonth" aria-label="FinalAmountPerMonth" formControlName = "finalAmountPerMonth" >
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-4 text-end ps-2 me-4">
+                        <button type="submit" class="btn btn-danger me-2"><i class="fa fa-close pe-1"></i> Reset</button>
+                        <button class="btn btn-success" (click)="addSubscriptionPlanDetail()" *ngIf="subscriptionPlanDetail.subscriptionId == 0" >
+                            <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-user-circle-o': !isLoading}"></i>
+                            {{ isLoading ? 'Wait' : 'Add' }}
+                        </button>
+                        <button class="btn btn-success" (click)="updateSubscriptionPlanDetail()" *ngIf="subscriptionPlanDetail.subscriptionId > 0" >
+                            <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-user-circle-o': !isLoading}"></i>
+                            {{ isLoading ? 'Wait' : 'Update' }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <!-- SubscriptionPlan-Detail Add or Update message modal -->
+<div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="messageModalSubscriptionPlan" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="p-2 modal-content">
+        <div class="modal-body text-dark d-flex align-items-center mb-0 pb-0">
+          <div class="wrapper-checkmark me-3">
+            <svg class="checkmark-register" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark_circle" cx="26" cy="26" r="25" fill="none"/> <path class="checkmark_check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+            </svg>
+          </div>
+          Congratulation!! Shift detail registered / updated successfully!
+        </div>
+        <div class="modal-footer mt-0 pt-0 border-top-0">
+          <a href="javascript:void(0)" class="text-decoration-none text-dark fw-bold" (click)="goToSubscriptionPlan()">OK</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End -->
+
+
+

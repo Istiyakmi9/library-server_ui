@@ -145,7 +145,7 @@ export class StudentComponent implements OnInit {
 }
 
 export class StudentDetail {
-  userId: number = 0;
+  studentId: number = 0;
   studentName: string = null;
   mobile: string = null;
   email: string = null;
