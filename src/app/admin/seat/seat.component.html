@@ -8,7 +8,7 @@
       <div [formGroup]="dragForm">
         <ng-container formArrayName="chairs">
           <ng-container *ngFor="let item of getArray().controls; let i = index " [formGroupName]="i">
-            <div tag="fresh-draggable" class="sample-box sample-box position-absolute" 
+            <div tag="fresh-draggable" class="sample-box sample-box position-absolute"
                 [attr.name]="i" (mouseup)="addChair(i)" draggableNode>
               Chair [{{i}}]
             </div>

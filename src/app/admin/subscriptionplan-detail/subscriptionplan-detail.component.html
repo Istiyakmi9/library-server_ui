@@ -14,70 +14,62 @@
             <div class="row mt-2 p-2 pe-3">
                 <form [formGroup]="subscriptionPlanDetailForm" *ngIf="subscriptionPlanDetailForm">
                     <div class="col-12 row">
-                        <div class="col-md-9">
+                        <div class="col-md-12">
                             <div class="row col-md-12">
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="" class="form-label ps-2">Subscription Name</label>
                                     <input type="text" class="form-control" placeholder="Subscription Name" aria-label="SubscriptionName" formControlName ="subscriptionName" >
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <label for="" class="form-label ps-2">Subscription Description</label>
                                     <input type="text" class="form-control" placeholder="Subscription Description" aria-label="SubscriptionDescription" formControlName="subscriptionDescription">
                                 </div>
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                   <div>
                                     <label for="" class="form-label ps-2">is Monthly Subscription</label>
 
                                   </div>
                                     <!-- <input type="text" class="form-control" placeholder="isMonthly Subscription" aria-label="is Monthly Subscription" formControlName = "isMonthlySubscription" > -->
                                     <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                      <input class="form-check-input" type="radio" name="isMonthlySubscription" (click)="subscriptionType($event)" id="inlineRadio1" value="true" formControlName="isMonthlySubscription">
                                       <label class="form-check-label" for="inlineRadio1">Yes</label>
                                     </div>
-                                    <div class="form-check form-check-inline">
-                                      <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                      <label class="form-check-label" for="inlineRadio2">No</label>
-                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                  <div>
+                                    <label for="" class="form-label ps-2">is Hourly Subscription</label>
+                                  </div>
+                                  <!-- <input type="text" class="form-control" placeholder="ReferenceLink" aria-label="isHourlySubscription" formControlName = "isHourlySubscription" > -->
+                                  <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="isMonthlySubscription" (click)="subscriptionType($event)" id="inlineRadio2" value="false" formControlName="isMonthlySubscription">
+                                    <label class="form-check-label" for="inlineRadio2">Yes</label>
+                                  </div>
                                 </div>
                             </div>
-                            <div class="row col-md-12 mt-3">
-                                <div class="col-md-4">
-                                    <label for="" class="form-label ps-2"> Number Of Months</label>
-                                    <input type="number" class="form-control" placeholder="numberOfMonths" aria-label="numberOfMonths" formControlName = "numberOfMonths" >
-                                </div>
-                                <div class="col-md-4">
-                                  <label for="" class="form-label ps-2">Monthly Amount</label>
-                                  <input type="number" class="form-control" placeholder="Monthly Amount" aria-label="Monthly Amount" formControlName = "monthlyAmount" >
+                          <div class="row col-md-12 mt-3">
+                            <ng-container *ngIf="subscriptionPlanDetailForm.controls.isMonthlySubscription.value == 'true'">
+                              <div class="col-md-4">
+                                <label for="" class="form-label ps-2"> Number Of Months </label>
+                                <input type="number" (keyup)="finalAmount()" class="form-control" placeholder="numberOfMonths" aria-label="numberOfMonths" formControlName = "numberOfMonths" >
                               </div>
                               <div class="col-md-4">
-                                <div>
-                                  <label for="" class="form-label ps-2">is Hourly Subscription</label>
-                                </div>
-                                <!-- <input type="text" class="form-control" placeholder="ReferenceLink" aria-label="isHourlySubscription" formControlName = "isHourlySubscription" > -->
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-                                  <label class="form-check-label" for="inlineRadio1">Yes</label>
-                                </div>
-                                <div class="form-check form-check-inline">
-                                  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-                                  <label class="form-check-label" for="inlineRadio2">No</label>
-                                </div>
-                              
+                                <label for="" class="form-label ps-2">Monthly Amount</label>
+                                <input type="number" (keyup)="finalAmount()" class="form-control" placeholder="Monthly Amount" aria-label="Monthly Amount" formControlName = "monthlyAmount" >
                               </div>
-                            </div>
-                          
-                          <div class="row col-md-12 mt-3">
-                            <div class="col-md-4">
-                                <label for="" class="form-label ps-2"> Hourly Amount</label>
-                                <input type="number" class="form-control" placeholder="Hourly Amount" aria-label="hourly Amount" formControlName = "hourlyAmount" >
-                            </div>
-                            <div class="col-md-4">
-                              <label for="" class="form-label ps-2">Number Of Hours</label>
-                              <input type="number" class="form-control" placeholder="Number Of Hours" aria-label="PaymentDate" formControlName = "numberOfHours" >
-                            </div>
+                            </ng-container>
+                            <ng-container *ngIf="subscriptionPlanDetailForm.controls.isMonthlySubscription.value == 'false'">
+                              <div class="col-md-4">
+                                  <label for="" class="form-label ps-2"> Hourly Amount</label>
+                                  <input type="number" class="form-control" (keyup)="finalAmount()" placeholder="Hourly Amount" aria-label="hourly Amount" formControlName = "hourlyAmount" >
+                              </div>
+                              <div class="col-md-4">
+                                <label for="" class="form-label ps-2">Number Of Hours</label>
+                                <input type="number" class="form-control" (keyup)="finalAmount()" placeholder="Number Of Hours" aria-label="PaymentDate" formControlName = "numberOfHours" >
+                              </div>
+                            </ng-container>
                             <div class="col-md-4">
                               <label for="" class="form-label ps-2">Final Amount Per Month</label>
-                              <input type="number" class="form-control" placeholder="FinalAmountPerMonth" aria-label="FinalAmountPerMonth" formControlName = "finalAmountPerMonth" >
+                              <input type="number" class="form-control" readonly placeholder="FinalAmountPerMonth" aria-label="FinalAmountPerMonth" formControlName = "finalAmountPerMonth" >
                             </div>
                           </div>
                         </div>

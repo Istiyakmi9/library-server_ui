@@ -73,15 +73,45 @@ export class SubscriptionplanDetailComponent  implements OnInit{
     this.subscriptionPlanDetailForm = this.fb.group({
       subscriptionName : new FormControl(this.subscriptionPlanDetail.subscriptionName),
       subscriptionDescription : new FormControl(this.subscriptionPlanDetail.subscriptionDescription),
-      isMonthlySubscription : new FormControl(this.subscriptionPlanDetail.isMonthlySubscription),
+      isMonthlySubscription : new FormControl(this.subscriptionPlanDetail.isMonthlySubscription ? 'true' : 'false'),
       numberOfMonths : new FormControl(this.subscriptionPlanDetail.numberOfMonths),
       monthlyAmount : new FormControl(this.subscriptionPlanDetail.monthlyAmount),
-      isHourlySubscription : new FormControl(this.subscriptionPlanDetail.isHourlySubscription),
       hourlyAmount : new FormControl(this.subscriptionPlanDetail.hourlyAmount),
       numberOfHours : new FormControl(this.subscriptionPlanDetail.numberOfHours),
-      finalAmountPerMonth : new FormControl(this.subscriptionPlanDetail.finalAmountPerMonth) 
+      finalAmountPerMonth : new FormControl(this.subscriptionPlanDetail.finalAmountPerMonth)
 
     })
+  }
+
+  finalAmount(){
+    let type = this.subscriptionPlanDetailForm.get('isMonthlySubscription').value;
+    if (type === "true") {
+      let month = this.subscriptionPlanDetailForm.get("numberOfMonths").value;
+      let monthlyAmount = this.subscriptionPlanDetailForm.get("monthlyAmount").value;
+      if (month && monthlyAmount) {
+        let amount = month * monthlyAmount;
+        this.subscriptionPlanDetailForm.get("finalAmountPerMonth").setValue(amount);
+      }
+    } else {
+      let hourlyAmount = this.subscriptionPlanDetailForm.get("hourlyAmount").value;
+      let hours = this.subscriptionPlanDetailForm.get("numberOfHours").value;
+      if (hours && hourlyAmount) {
+        let amount = hours * hourlyAmount;
+        this.subscriptionPlanDetailForm.get("finalAmountPerMonth").setValue(amount);
+      }
+    }
+  }
+
+  subscriptionType(e: any) {
+    let value = e.target.value;
+    if (value === "true") {
+      this.subscriptionPlanDetailForm.get("hourlyAmount").setValue(0);
+      this.subscriptionPlanDetailForm.get("numberOfHours").setValue(0);
+    } else {
+      this.subscriptionPlanDetailForm.get("numberOfMonths").setValue(0);
+      this.subscriptionPlanDetailForm.get("monthlyAmount").setValue(0);
+    }
+    this.subscriptionPlanDetailForm.get("finalAmountPerMonth").setValue(0);
   }
 
   goToSubscriptionPlan(){
