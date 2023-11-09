@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ResponseModel } from 'src/auth/jwtService';
 import { AjaxService } from 'src/provider/ajax.service';
+import { Toast } from 'src/provider/common-service/common.service';
 import { PaymentDetails } from 'src/provider/constants';
 import { Filter, iNavigation } from 'src/provider/iNavigation';
 
@@ -10,12 +12,13 @@ import { Filter, iNavigation } from 'src/provider/iNavigation';
 })
 export class PaymentComponent implements OnInit {
 
-  isRecordFound: boolean = false;
+    allPayment : Array<any> = [];
+    isRecordFound: boolean = false;
     paymentData: Filter = new Filter();
     orderByMonthAsc: boolean = null;
     orderByYearAsc: boolean = null;
-    orderByPaymentModeAsc: boolean = null;
-    orderByAmountAsc: boolean = null;
+    orderByModeOfPaymentAsc: boolean = null;
+    orderByAmountReceivedAsc: boolean = null;
 
     isLoading: boolean = false;
     // shiftDetail:any = null;
@@ -25,7 +28,28 @@ export class PaymentComponent implements OnInit {
                 private nav: iNavigation){}
   
   ngOnInit(): void {
-    
+    this.loadPaymentData();
+  }
+
+  loadPaymentData(){
+    this.isRecordFound = false;
+    this.isLoading = true;
+    this.http.get("paymentTransaction/getAllPaymentTransaction").then((res:ResponseModel) => {
+      if(res.ResponseBody){
+        this.allPayment = res.ResponseBody;
+        this.paymentData.TotalRecords = this.allPayment.length;
+        this.isRecordFound = true;
+        this.isLoading = false;
+        Toast("Payment Data Loaded successfully");
+      }
+    }).catch(e =>{
+      console.log(e.error);
+    })
+
+  }
+
+  updatePaymentDetail(item : PaymentDetail){
+    this.nav.navigate(PaymentDetails, item);
   }
 
   navPaymentDetail(){
@@ -35,7 +59,7 @@ export class PaymentComponent implements OnInit {
   GetFilterResult(e: Filter) {
         if(e != null) {
           this.paymentData = e;
-        
+          this.loadPaymentData();
         }
       }
     
@@ -49,25 +73,25 @@ export class PaymentComponent implements OnInit {
         if (FieldName == 'Month') {
           this.orderByMonthAsc = !flag;
           this.orderByYearAsc = null;
-          this.orderByPaymentModeAsc = null;
-          this.orderByAmountAsc = null;
+          this.orderByModeOfPaymentAsc = null;
+          this.orderByAmountReceivedAsc = null;
         } else if (FieldName == 'Year') {
           this.orderByYearAsc = !flag;
           this.orderByMonthAsc = null;
-          this.orderByPaymentModeAsc = null;
-          this.orderByAmountAsc = null;
+          this.orderByModeOfPaymentAsc = null;
+          this.orderByAmountReceivedAsc = null;
         }
-        else if (FieldName == 'PaymentMode') {
-          this.orderByPaymentModeAsc = !flag;
+        else if (FieldName == 'ModeOfPayment') {
+          this.orderByModeOfPaymentAsc = !flag;
           this.orderByMonthAsc = null;
           this.orderByYearAsc = null;
-          this.orderByAmountAsc = null;
+          this.orderByAmountReceivedAsc = null;
         }
-        if (FieldName == 'Amount') {
-          this.orderByAmountAsc = !flag;
+        if (FieldName == 'AmountReceived') {
+          this.orderByAmountReceivedAsc = !flag;
           this.orderByMonthAsc = null;
           this.orderByYearAsc = null;
-          this.orderByPaymentModeAsc = null;
+          this.orderByModeOfPaymentAsc = null;
           this.paymentData = new Filter();
           this.paymentData.SortBy = FieldName +" "+ Order;
       }
@@ -83,25 +107,28 @@ export class PaymentComponent implements OnInit {
       this.paymentData = new Filter();
       this.paymentDetail.month=0;
       this.paymentDetail.year= 0;
-      this.paymentDetail.paymentMode= null;
-      this.paymentDetail.amount=0;
+      this.paymentDetail.modeOfPayment= null;
+      this.paymentDetail.amountReceived=0;
+      this.loadPaymentData();
       
       }
     
     }
     
     export class PaymentDetail{
-      paymentId: number = 0;
-      userId: number = 0;
+      transactionId: number = 0;
+      studentId: number = 0;
+      libraryId: number = 0;
+      subscriptionId: number = 0;
       month: number = 0;
       year: number = 0;
-      paymentMode: String = null;
-      amount: number = 0;
-      paymentStatus: number = 0;
+      amountReceived: number = 0;
+      discountCode: string = null;
+      finalAmountAfterDiscount: number = 0;
+      modeOfPayment: string = null; 
+      transactionReferenceId: string = null;
       referenceLink: string = null;
-      paymentReferenceId: string = null;
-      paymentDate: Date = null;
-      approvedBy: number = null;
-      approvedOn: Date = null;
+      paymentStatusId: number = 0;
+      transactionDate: Date = null;
 
     }

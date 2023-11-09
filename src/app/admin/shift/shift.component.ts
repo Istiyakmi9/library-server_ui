@@ -123,5 +123,4 @@ export class ShiftDetail{
   feesQuaterly: number = 0;
   feesHalfYearly: number = 0;
 
-
 }

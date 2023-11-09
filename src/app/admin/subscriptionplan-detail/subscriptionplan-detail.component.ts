@@ -129,7 +129,7 @@ export class SubscriptionplanDetailComponent  implements OnInit{
   isMonthlySubscription : Boolean = false;
   numberOfMonths : number = 0;
   monthlyAmount : number = 0;
-  isHourlySubscription : Boolean = false;
+  isHourlySubscription : boolean = false;
   hourlyAmount : number = 0;
   numberOfHours : number = 0;
   finalAmountPerMonth : number = 0;

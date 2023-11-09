@@ -24,43 +24,44 @@
                                     <input type="number" class="form-control" placeholder="Year" aria-label="Year" formControlName="year">
                                 </div>
                                 <div class="col-md-4">
-                                    <label for="" class="form-label ps-2">Payment Mode</label>
-                                    <input type="text" class="form-control" placeholder="Payment Mode" aria-label="Payment Mode" formControlName = "paymentMode" >
-                                </div>
+                                  <label for="" class="form-label ps-2">Amount Received</label>
+                                  <input type="number" class="form-control" placeholder="AmountReceived" aria-label="AmountReceived" formControlName = "amountReceived" >
+                              </div>
                             </div>
+
                             <div class="row col-md-12 mt-3">
-                                <div class="col-md-4">
-                                    <label for="" class="form-label ps-2">Amount</label>
-                                    <input type="number" class="form-control" placeholder="Amount" aria-label="Amount" formControlName = "amount" >
-                                </div>
-                                <div class="col-md-4">
-                                  <label for="" class="form-label ps-2">Payment Status</label>
-                                  <input type="number" class="form-control" placeholder="PaymentStatus" aria-label="PaymentStatus" formControlName = "paymentStatus" >
-                              </div>
                               <div class="col-md-4">
-                                <label for="" class="form-label ps-2">Reference Link</label>
-                                <input type="text" class="form-control" placeholder="ReferenceLink" aria-label="ReferenceLink" formControlName = "referenceLink" >
-                              </div>
+                                <label for="" class="form-label ps-2">Discount Code</label>
+                                <input type="text" class="form-control" placeholder="DiscountCode" aria-label="DiscountCode" formControlName = "discountCode" >
                             </div>
-                          
+                            <div class="col-md-4">
+                              <label for="" class="form-label ps-2">Final Amount After Discount</label>
+                              <input type="number" class="form-control" placeholder="FinalAmountAfterDiscount" aria-label="FinalAmountAfterDiscount" formControlName = "finalAmountAfterDiscount" >
+                            </div>
+                            <div class="col-md-4">
+                              <label for="" class="form-label ps-2"> Mode Of Payment</label>
+                              <input type="text" class="form-control" placeholder="Payment Mode" aria-label="Payment Mode" formControlName = "modeOfPayment" >
+                          </div>
+                          </div>
+                              
                           <div class="row col-md-12 mt-3">
                             <div class="col-md-4">
-                                <label for="" class="form-label ps-2">Payment Reference Id</label>
-                                <input type="text" class="form-control" placeholder="PaymentReferenceId" aria-label="PaymentReferenceId" formControlName = "paymentReferenceId" >
+                                <label for="" class="form-label ps-2">Transaction Reference Id</label>
+                                <input type="text" class="form-control" placeholder="TransactionReferenceId" aria-label="TransactionReferenceId" formControlName = "transactionReferenceId" >
                             </div>
                             <div class="col-md-4">
-                              <label for="" class="form-label ps-2">PaymentDate</label>
-                              <input type="date" class="form-control" placeholder="PaymentDate" aria-label="PaymentDate" formControlName = "paymentDate" >
+                              <label for="" class="form-label ps-2">Reference Link</label>
+                              <input type="text" class="form-control" placeholder="ReferenceLink" aria-label="ReferenceLink" formControlName = "referenceLink" >
                             </div>
                             <div class="col-md-4">
-                              <label for="" class="form-label ps-2">Approved By</label>
-                              <input type="text" class="form-control" placeholder="ApprovedBy" aria-label="ApprovedBy" formControlName = "approvedBy" >
+                              <label for="" class="form-label ps-2">Payment Status Id</label>
+                              <input type="number" class="form-control" placeholder="PaymentStatusId" aria-label="PaymentStatusId" formControlName = "paymentStatusId" >
                             </div>
                           </div>
                           <div class="row col-md-12 mt-3">
                             <div class="col-md-4">
-                                <label for="" class="form-label ps-2">Approved On</label>
-                                <input type="date" class="form-control" placeholder="approvedOn" aria-label="approvedOn" formControlName = "approvedOn" >
+                                <label for="" class="form-label ps-2">Transaction Date</label>
+                                <input type="date" class="form-control" placeholder="TransactionDate" aria-label="TransactionDate" formControlName = "transactionDate" >
                             </div>
                           </div>
                         </div>
@@ -68,11 +69,11 @@
                     
                     <div class="mt-4 text-end ps-2 me-4">
                         <button type="submit" class="btn btn-danger me-2"><i class="fa fa-close pe-1"></i> Reset</button>
-                        <button class="btn btn-success" (click)="addPaymnettDetail()" *ngIf="paymentDetail.paymentId == 0" >
+                        <button class="btn btn-success" (click)="addPaymnettDetail()" *ngIf="paymentDetail.transactionId == 0" >
                             <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-user-circle-o': !isLoading}"></i>
                             {{ isLoading ? 'Wait' : 'Add' }}
                         </button>
-                        <button class="btn btn-success" (click)="updatePaymentDetail()" *ngIf="paymentDetail.paymentId > 0" >
+                        <button class="btn btn-success" (click)="updatePaymentDetail()" *ngIf="paymentDetail.transactionId > 0" >
                             <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-user-circle-o': !isLoading}"></i>
                             {{ isLoading ? 'Wait' : 'Update' }}
                         </button>
@@ -83,7 +84,7 @@
     </div>
   </div>
 
-  <!-- ShiftDetail Register or Update message modal -->
+  <!-- Payment-detail added or Update message modal -->
 <div class="modal fade" data-bs-backdrop="static" data-bs-keyboard="false" id="messageModalPayment" tabindex="-1" aria-labelledby="messageModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
       <div class="p-2 modal-content">
@@ -92,7 +93,7 @@
             <svg class="checkmark-register" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"> <circle class="checkmark_circle" cx="26" cy="26" r="25" fill="none"/> <path class="checkmark_check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
             </svg>
           </div>
-          Congratulation!! Shift detail registered / updated successfully!
+          Congratulation!! Payment-detail added / updated successfully!
         </div>
         <div class="modal-footer mt-0 pt-0 border-top-0">
           <a href="javascript:void(0)" class="text-decoration-none text-dark fw-bold" (click)="goToPayment()">OK</a>

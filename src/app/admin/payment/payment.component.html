@@ -60,15 +60,15 @@
                 <div class="th fe-2">
                   <div class="cell-wrapper">
                     <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
-                      (keydown.esc)="resetFilter()" [(ngModel)]="paymentDetail.paymentMode"
-                      placeholder="Search by PaymentMode">
-                    <div class="t-filter" (click)="arrangeDetails(orderByPaymentModeAsc, 'PaymentMode')">
-                      <a href="javascript:void()" class="pe-2">PaymentMode</a>
+                      (keydown.esc)="resetFilter()" [(ngModel)]="paymentDetail.modeOfPayment"
+                      placeholder="Search by ModeOfPayment">
+                    <div class="t-filter" (click)="arrangeDetails(orderByModeOfPaymentAsc, 'ModeOfPayment')">
+                      <a href="javascript:void()" class="pe-2">Mode Of Payment</a>
                       <i class="fa fa-sort-amount-asc"
-                        [ngClass]="{'d-none': orderByPaymentModeAsc == null || !orderByPaymentModeAsc }"
+                        [ngClass]="{'d-none': orderByModeOfPaymentAsc == null || !orderByModeOfPaymentAsc }"
                         aria-hidden="true"></i>
                       <i class="fa fa-sort-amount-desc"
-                        [ngClass]="{'d-none': orderByPaymentModeAsc == null || orderByPaymentModeAsc }"
+                        [ngClass]="{'d-none': orderByModeOfPaymentAsc == null || orderByModeOfPaymentAsc }"
                         aria-hidden="true"></i>
                     </div>
                   </div>
@@ -76,14 +76,14 @@
                 <div class="th fe-2">
                   <div class="cell-wrapper">
                     <input class="form-control  form-control-sm" (keyup.enter)="filterRecords()"
-                      this.paymentDetail.amount=0; (keydown.esc)="resetFilter()" [(ngModel)]="paymentDetail.amount"
-                      placeholder="Search by Amount">
-                    <div class="t-filter" (click)="arrangeDetails(orderByAmountAsc, 'Amount')">
-                      <a href="javascript:void()" class="pe-2">Amount</a>
+                      this.paymentDetail.amount=0; (keydown.esc)="resetFilter()" [(ngModel)]="paymentDetail.amountReceived"
+                      placeholder="Search by AmountReceived">
+                    <div class="t-filter" (click)="arrangeDetails(orderByAmountReceivedAsc, 'AmountReceived')">
+                      <a href="javascript:void()" class="pe-2">Amount Received</a>
                       <i class="fa fa-sort-amount-asc"
-                        [ngClass]="{'d-none': orderByAmountAsc == null || !orderByAmountAsc }" aria-hidden="true"></i>
+                        [ngClass]="{'d-none': orderByAmountReceivedAsc == null || !orderByAmountReceivedAsc }" aria-hidden="true"></i>
                       <i class="fa fa-sort-amount-desc"
-                        [ngClass]="{'d-none': orderByAmountAsc == null || orderByAmountAsc }" aria-hidden="true"></i>
+                        [ngClass]="{'d-none': orderByAmountReceivedAsc == null || orderByAmountReceivedAsc }" aria-hidden="true"></i>
                     </div>
                   </div>
                 </div>
@@ -92,7 +92,7 @@
             </div>
             <div class="t-body">
               <ng-container *ngIf="isRecordFound">
-                <div class="tr py-2" *ngFor="let student of allStudent; let i = index;">
+                <div class="tr py-2" *ngFor="let payment of allPayment; let i = index;">
                   <div class="td align-middle text-center fe-index">
                     <div class="cell-wrapper">
                       {{i + 1}}
@@ -100,22 +100,27 @@
                   </div>
                   <div class="td align-middle fe-5">
                     <div class="cell-wrapper">
-                      {{paymentDetail.month}}
+                      {{payment.month}}
                     </div>
                   </div>
                   <div class="td align-middle fe-2">
                     <div class="cell-wrapper">
-                      {{paymentDetail.year}}
+                      {{payment.year}}
                     </div>
                   </div>
                   <div class="td align-middle fe-2">
                     <div class="cell-wrapper">
-                      {{paymentDetail.paymentMode}}
+                      {{payment.modeOfPayment}}
+                    </div>
+                  </div>
+                  <div class="td align-middle fe-2">
+                    <div class="cell-wrapper">
+                      {{payment.amountReceived}}
                     </div>
                   </div>
                   <div class="td align-middle text-center fe-1">
                     <a href="javascript:void(0)" class="text-deccoration-none">
-                      <i class="fa fa-pencil text-primary" aria-hidden="true"></i>
+                      <i class="fa fa-pencil text-primary" (click)="updatePaymentDetail(payment)"  aria-hidden="true"></i>
                     </a>
                     <a href="javascript:void(0)" class="text-deccoration-none ms-2 ">
                       <i class="fa fa-trash-o ps-2 text-danger" aria-hidden="true"></i>
