@@ -1,9 +1,36 @@
-<div class="row col-md-12 p-5 m-5">
-    <label class="fs-2 fw-bold  ps-10 text-center" for="">Select your Seat</label>
-    <div *ngIf="counts.length > 0" class="col-md-12">
-        <ng-container *ngFor="let item of counts">
-          <span class="badge bg-secondary boxsize py-auto">{{item}}</span>
+<div class="row h-100">
+  <div class="col-md-10 d-flex flex-wrap" id="box-container">
+    <span class="sample-box" draggableNode *ngFor="let item of list">Drag me around</span>
+  </div>
+  <ng-container *ngIf="isFormReady">
+    <div class="col-md-2 bg-white shadow" (dragover)="allowDrop($event)">
+      <div class="sample-box position-absolute">Drag me around</div>
+      <div [formGroup]="dragForm">
+        <ng-container formArrayName="chairs">
+          <ng-container *ngFor="let item of getArray().controls; let i = index " [formGroupName]="i">
+            <div tag="fresh-draggable" class="sample-box sample-box position-absolute"
+                [attr.name]="i" (mouseup)="addChair(i)" draggableNode>
+              Chair [{{i}}]
+            </div>
+          </ng-container>
         </ng-container>
       </div>
-
+    </div>
+  </ng-container>
 </div>
+
+<!-- <form [formGroup]="dragForm">
+  <div class="row h-100">
+      <div class="col-md-10" >
+        <div class="example-box" draggableNode>Drag me around</div>
+      </div>
+      <div class="col-md-2 bg-white shadow" id="box-container" (dragover)="allowDrop($event)" formArrayName="chairs">
+        <div class="sample-box position-fixed">Drag me around</div>
+        <ng-container *ngFor="let item of getArray['controls']; let i = index " [formGroupName]="i">
+          <div class="sample-box" formControlName="chair" draggableNode (click)="create($event)">Drag me around</div>
+        </ng-container>
+      </div>
+  </div>
+</form> -->
+  
+  

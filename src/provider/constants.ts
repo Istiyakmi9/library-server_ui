@@ -14,6 +14,10 @@ export const ShiftDetails = 'admin/shiftdetail';
 export const MasterData = 'admin/master';
 export const SeatData = 'admin/seat';
 export const Payment = 'admin/payment';
+export const PaymentDetails = 'admin/paymentdetail';
+export const SubscriptionPlans = 'admin/subscriptionplan';
+export const SubscriptionPlanDetails = 'admin/subscriptionplan-detail'
+
 export const LiveUrl = "liveurl";
 export const ApiKey = "AIzaSyAkFANPvmh1x_ajxADulhWiPcsNJHqw1Hs";
 export const AccessTokenExpiredOn = "access_token_expired_on";

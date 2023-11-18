@@ -188,11 +188,11 @@
                     </div>
                     <div class="mt-4 text-end ps-2 me-4">
                         <button type="submit" class="btn btn-danger me-2"><i class="fa fa-close pe-1"></i> Reset</button>
-                        <button class="btn btn-success" (click)="addStudentDetail()" *ngIf="studentDetail.userId == 0">
+                        <button class="btn btn-success" (click)="addStudentDetail()" *ngIf="studentDetail.studentId == 0">
                             <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-user-circle-o': !isLoading}"></i>
                             {{ isLoading ? 'Wait' : 'Register' }}
                         </button>
-                        <button class="btn btn-success" (click)="updateStudentDetail()" *ngIf="studentDetail.userId > 0">
+                        <button class="btn btn-success" (click)="updateStudentDetail()" *ngIf="studentDetail.studentId > 0">
                             <i class="fa" [ngClass]="{'fa-spin fa-spinner': isLoading, 'fa-user-circle-o': !isLoading}"></i>
                             {{ isLoading ? 'Wait' : 'Update' }}
                         </button>

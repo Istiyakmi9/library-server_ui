@@ -7,6 +7,7 @@ import { DecimalnumberDirective } from './directives/decimalnumber.directive';
 import { BreadcrumsComponent } from './breadcrums/breadcrums.component';
 import { PaginationComponent } from './pagination/pagination.component';
 import { PreLoadTableComponent } from './pre-load-table/pre-load-table.component';
+import { DraggingNodeDirective } from './directives/draggable.directive';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { PreLoadTableComponent } from './pre-load-table/pre-load-table.component
     DecimalnumberDirective,
     BreadcrumsComponent,
     PaginationComponent,
-    PreLoadTableComponent
+    PreLoadTableComponent,
+    DraggingNodeDirective
   ],
   imports: [
     CommonModule,
@@ -26,7 +28,8 @@ import { PreLoadTableComponent } from './pre-load-table/pre-load-table.component
     DecimalnumberDirective,
     BreadcrumsComponent,
     PaginationComponent,
-    PreLoadTableComponent
+    PreLoadTableComponent,
+    DraggingNodeDirective
   ]
 })
 export class UtilModule { }

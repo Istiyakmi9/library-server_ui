@@ -1,25 +1,66 @@
-import { Component, OnInit } from '@angular/core';
-import { AjaxService } from 'src/provider/ajax.service';
-import { iNavigation } from 'src/provider/iNavigation';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-seat',
   templateUrl: './seat.component.html',
-  styleUrls: ['./seat.component.scss']
+  styleUrls: ['./seat.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class SeatComponent implements OnInit{
+  dragForm: FormGroup;
+  list: Array<number> = [];
+  isFormReady = false;
+  freshChairIndex = 0;
 
-  counts: Array<number> = [];
+  constructor(private fb: FormBuilder){};
 
-  constructor(private http: AjaxService,
-    private nav: iNavigation){}
+  ngOnInit(): void {
+    this.initForm();
+    this.isFormReady = true;
+  }
 
-    ngOnInit(): void {
+  allowDrop(event) {
+    event.preventDefault();
+  }
 
-      for (let i = 0; i < 100; i++) {
-        this.counts.push(i+1);
-      }
-      
+  create(e: any) {
+    e.stopPropagation();
+    e.preventDefault();
+    // let tag = document.createElement('div');
+    // tag.className="sample-box";
+    // tag.appendChild(document.createTextNode("Drag me around"));
+    // let target = <HTMLElement> document.getElementById("box-container");
+    // target.appendChild(tag);
+    this.list.push(this.list.length + 1);
+    // alert("hi");
+  }
+
+  dragleaveEvent() {
+    alert("working");
+  }
+  
+  initForm() {
+    this.dragForm = this.fb.group({
+      chairs: this.fb.array([this.buildChairArray()])
+    });
+  }
+
+  buildChairArray() {
+    return this.fb.group({
+      chair: new FormControl()
+    })
+  }
+
+  addChair(chairIndex: number) {
+    if(this.freshChairIndex == chairIndex) {
+      this.freshChairIndex++;
+      let groupArray = this.dragForm.get("chairs") as FormArray;
+      groupArray.push(this.buildChairArray);
     }
+  }
 
+  getArray(): FormArray {
+    return  (<FormArray>this.dragForm.get("chairs"));
+  }
 }

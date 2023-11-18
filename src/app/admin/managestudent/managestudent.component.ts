@@ -24,7 +24,8 @@ export class ManagestudentComponent implements OnInit {
   studentDetail: StudentDetail = new StudentDetail();
   fileDetail: Array<any> = [];
   imageIndex: number = 0;
-  studentId: number = 0;
+  student_id: number = 0;
+  
   constructor(private fb: FormBuilder,
               private http: AjaxService,
               private nav: iNavigation){}
@@ -32,7 +33,7 @@ export class ManagestudentComponent implements OnInit {
   ngOnInit(): void {
     let data:StudentDetail = this.nav.getValue();
     if(data){
-      this.studentId = data.userId;
+      this.student_id = data.studentId;
       this.loadData()
     }else{
       this.initForm()
@@ -40,7 +41,7 @@ export class ManagestudentComponent implements OnInit {
   }
 
   loadData(){
-    this.http.get(`studentDetail/getStudentDetailByUserId/${this.studentId}`).then((res:ResponseModel) => {
+    this.http.get(`studentDetail/getStudentDetailByStudentId/${this.student_id}`).then((res:ResponseModel) => {
       if(res.ResponseBody){
         this.studentDetail = res.ResponseBody;
         this.studentDetail.dateOfJoining = new Date(this.studentDetail.dateOfJoining);
@@ -83,7 +84,7 @@ export class ManagestudentComponent implements OnInit {
     if (this.fileDetail.length > 0)
       formData.append("profile", this.fileDetail[0].file);
     
-    this.http.put(`studentDetail/updateStudentDetail/${this.studentDetail.userId}`, formData).then((res:ResponseModel) => {
+    this.http.put(`studentDetail/updateStudentDetail/${this.studentDetail.studentId}`, formData).then((res:ResponseModel) => {
       if(res.ResponseBody) {
         // alert("Data has been updated in StudentDetail");
         $('#messageModal').modal('show');
@@ -162,8 +163,8 @@ export class ManagestudentComponent implements OnInit {
       refIdCardIssueDate: new FormControl(this.studentDetail.refIdCardIssueDate),
       cardDeposit: new FormControl(this.studentDetail.cardDeposit),
       remarks: new FormControl(this.studentDetail.remarks),
-      userRoleId: new FormControl(this.studentDetail.userRoleId)
-
+      userRoleId: new FormControl(this.studentDetail.userRoleId),
+      studentId: new FormControl(this.studentDetail.studentId)
     })
   }
 

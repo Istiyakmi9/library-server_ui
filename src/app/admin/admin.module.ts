@@ -12,6 +12,9 @@ import { ShiftdetailComponent } from './shiftdetail/shiftdetail.component';
 import { MasterComponent } from './master/master.component';
 import { SeatComponent } from './seat/seat.component';
 import { PaymentComponent } from './payment/payment.component';
+import { PaymentDetailComponent } from './payment-detail/payment-detail.component';
+import { SubscriptionplanComponent } from './subscriptionplan/subscriptionplan.component';
+import { SubscriptionplanDetailComponent } from './subscriptionplan-detail/subscriptionplan-detail.component';
 
 
 
@@ -24,7 +27,10 @@ import { PaymentComponent } from './payment/payment.component';
     ShiftdetailComponent,
     MasterComponent,
     SeatComponent,
-    PaymentComponent
+    PaymentComponent,
+    PaymentDetailComponent,
+    SubscriptionplanComponent,
+    SubscriptionplanDetailComponent
   ],
   imports: [
     CommonModule,

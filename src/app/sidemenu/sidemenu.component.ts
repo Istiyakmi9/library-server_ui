@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./sidemenu.component.scss']
 })
 export class SidemenuComponent {
-
+    
 }
